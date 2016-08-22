@@ -1,7 +1,7 @@
 #include "PhysicsBodyLight.h"
 #include "WorldManager.h"
 #include <LightLayer.h>
-#include <LightBlocker.h>
+#include <LightBlockerContainer.h>
 #include <Core.h>
 #include <Box2D/Box2D.h>
 

@@ -2,12 +2,17 @@
 #include "PerlinManager.h"
 #include "BlockColumn.h"
 #include "WorldManager.h"
+#include "DebugBox.h"
+#include <time.h>
 
 TerrainManager::TerrainManager(WorldManager* wm)
-	:begin(0), end(BLOCK_COLS_SIZE - 1), wm(wm), bX(0)
+	:begin(0), end(BLOCK_COLS_SIZE - 1), wm(wm), bX(0), bY(INITIAL_BY)
 {
-	perlinManager = new PerlinManager(int64_t(23424213424));
-	initCols( );
+	srand(time(NULL));
+	perlinManager = new PerlinManager(int64_t(rand() % 10000000000));
+	wm->debugBox->addField("BX", "?");
+	wm->debugBox->addField("BY", "?");
+	initCols();
 }
 
 BlockColumn * TerrainManager::initCol(int bX)
@@ -25,6 +30,8 @@ void TerrainManager::initCols()
 
 void TerrainManager::draw()
 {
+	wm->debugBox->setField("BX", std::to_string(bX));
+	wm->debugBox->setField("BY", std::to_string(bY));
 	double x;
 	if (wm->getPixelWorldX() < 0)
 	{
@@ -34,6 +41,7 @@ void TerrainManager::draw()
 	{
 		x = (int)(-(abs((int)wm->getPixelWorldX()) % Block::BLOCK_WIDTH));
 	}
+	al_hold_bitmap_drawing(true);
 	int bIndex = begin;
 	for (int i = 0; i < BLOCK_COLS_SIZE; i++)
 	{
@@ -45,6 +53,7 @@ void TerrainManager::draw()
 			bIndex = 0;
 		}
 	}
+	al_hold_bitmap_drawing(false);
 }
 
 void TerrainManager::translate(float dX, float dY)
@@ -88,7 +97,7 @@ void TerrainManager::shiftBX(int count)
 	for (int i = 0; i < abs(count); i++)
 	{
 		begin += count/abs(count);
-		bX -= count / abs(count);
+		bX += count / abs(count);
 		if (begin >= BLOCK_COLS_SIZE)
 		{
 			begin = 0;
@@ -120,7 +129,7 @@ void TerrainManager::shiftBX(int count)
 
 void TerrainManager::shiftBY(int count)
 {
-	bY -= count;
+	bY += count;
 	for (int i = 0; i < BLOCK_COLS_SIZE; i++)
 	{
 		blockCols.at(i)->shiftBY(count);

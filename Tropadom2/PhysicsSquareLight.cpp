@@ -1,7 +1,7 @@
 #include "PhysicsSquareLight.h"
 #include "WorldManager.h"
 #include <LightLayer.h>
-#include <LightBlocker.h>
+#include <LightBlockerContainer.h>
 #include <allegro5/allegro.h>
 
 PhysicsSquareLight::PhysicsSquareLight(LightLayer* lightManager, WorldManager* world, BodyMode bm, float x, float y, float w, float h, float degs, uint8_t r, uint8_t g, uint8_t b, uint8_t a)

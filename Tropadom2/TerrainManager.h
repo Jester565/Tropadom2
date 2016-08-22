@@ -11,7 +11,7 @@ class TerrainManager
 {
 public:
 	static const int BLOCK_COLS_SIZE = AllegroExt::Graphics::WINDOW_X/Block::BLOCK_WIDTH + 2;
-	static const int INITIAL_BY = 300;
+	static const int INITIAL_BY = 200;
 	TerrainManager(WorldManager* wm);
 
 	void draw();

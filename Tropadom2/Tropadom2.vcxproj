@@ -66,14 +66,20 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\Props\Allegro64_R.props" />
     <Import Project="..\..\..\Props\AllegroExt64_R.props" />
     <Import Project="..\..\..\Props\Boost64_R.props" />
     <Import Project="..\..\..\Props\Box2D64_R.props" />
     <Import Project="AllegroLight64_R.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -119,7 +125,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockColumn.cpp" />
     <ClCompile Include="BoxCore.cpp" />
-    <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="DebugBox.cpp" />
     <ClCompile Include="PerlinManager.cpp" />
     <ClCompile Include="PhysicsBody.cpp" />
     <ClCompile Include="PhysicsBodyLight.cpp" />
@@ -137,7 +143,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockColumn.h" />
     <ClInclude Include="BoxCore.h" />
-    <ClInclude Include="GameTest.h" />
+    <ClInclude Include="DebugBox.h" />
     <ClInclude Include="PerlinManager.h" />
     <ClInclude Include="PhysicsBody.h" />
     <ClInclude Include="PhysicsBodyLight.h" />
@@ -150,7 +156,19 @@
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\AllegroDeps.1.4.0.0\build\native\AllegroDeps.targets" Condition="Exists('..\packages\AllegroDeps.1.4.0.0\build\native\AllegroDeps.targets')" />
+    <Import Project="..\packages\Allegro.5.2.1.1\build\native\Allegro.targets" Condition="Exists('..\packages\Allegro.5.2.1.1\build\native\Allegro.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AllegroDeps.1.4.0.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AllegroDeps.1.4.0.0\build\native\AllegroDeps.targets'))" />
+    <Error Condition="!Exists('..\packages\Allegro.5.2.1.1\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Allegro.5.2.1.1\build\native\Allegro.targets'))" />
+  </Target>
 </Project>

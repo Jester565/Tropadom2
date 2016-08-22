@@ -1,6 +1,6 @@
 #include "PhysicsImgLight.h"
 #include "WorldManager.h"
-#include <LightBlocker.h>
+#include <LightBlockerContainer.h>
 #include <allegro5/allegro.h>
 #include <iostream>	//temp include
 

@@ -6,7 +6,6 @@ using namespace AllegroExt;
 
 class WorldManager;
 class LightLayer;
-class GameTest;
 
 class BoxCore : public Core
 {
@@ -30,7 +29,6 @@ protected:
 	void draw() override;
 	LightLayer* lightLayer;
 	WorldManager* worldManager;
-	GameTest* gameTest;
 	AllegroExt::FPSLogger* fpsLogger;
 };
 

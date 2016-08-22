@@ -5,12 +5,13 @@
 
 class WorldManager;
 class PerlinManager;
+class AboveLightBlocker;
 
 class BlockColumn
 {
 public:
 	static const int BLOCKS_SIZE = AllegroExt::Graphics::WINDOW_Y/Block::BLOCK_WIDTH + 2;
-	static const int MAX_BY = 0;
+	static const int MAX_BY = 500;
 	BlockColumn(WorldManager* wm, PerlinManager* pm, int bX, int bY);
 	void draw(double x);
 	void shiftBY(int count);
@@ -24,7 +25,10 @@ private:
 	int bY;
 	int begin;
 	int end;
+	int groundY;
+	std::vector<std::pair<int, int>> airRanges;
 	PerlinManager* perlinManager;
+	AboveLightBlocker* alb;
 	WorldManager* wm;
 };
 

@@ -3,12 +3,12 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>C:\Users\ajcra\Documents\Visual Studio 2015\Projects\Lighting\Lighting;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\ajcra\Documents\Visual Studio 2015\Projects\Lighting\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\ajcra\Documents\Visual Studio 2015\Projects\Lighting2\Lighting2;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\ajcra\Documents\Visual Studio 2015\Projects\Lighting2\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>Lighting.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Lighting2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

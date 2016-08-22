@@ -1,6 +1,5 @@
 #include "BoxCore.h"
 #include "WorldManager.h"
-#include "GameTest.h"
 #include <LightLayer.h>
 #include <Box2D/Box2D.h>
 
@@ -17,7 +16,6 @@ bool BoxCore::init()
 		worldManager = new WorldManager();
 		if (worldManager->init())
 		{
-			gameTest = new GameTest(this);
 			fpsLogger = new AllegroExt::FPSLogger();
 			return true;
 		}

@@ -23,6 +23,7 @@ GameTest::GameTest(BoxCore* boxCore)
 	boxCore->getSoundManager()->addIDVol(1.0);
 	monsterSong = new AllegroExt::Sound::Music(boxCore->getSoundManager(), "monster.ogg");
 	grassStep = new AllegroExt::Sound::SoundEffect(boxCore->getSoundManager(), "grass1.wav", 0);
+
 }
 
 void GameTest::draw()
