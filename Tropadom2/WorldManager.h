@@ -64,6 +64,11 @@ public:
 		return lightLayer;
 	}
 
+	TerrainManager* getTerrainManager()
+	{
+		return terrainManager;
+	}
+
 	DebugBox* debugBox;
 
 	~WorldManager();

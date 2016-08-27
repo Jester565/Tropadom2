@@ -69,7 +69,7 @@
     <Import Project="..\..\..\Props\AllegroExt64_R.props" />
     <Import Project="..\..\..\Props\Boost64_R.props" />
     <Import Project="..\..\..\Props\Box2D64_R.props" />
-    <Import Project="AllegroLight64_R.props" />
+    <Import Project="..\..\..\Props\AllegroLightMT64_R.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -136,6 +136,7 @@
     <ClCompile Include="PhysicsSquare.cpp" />
     <ClCompile Include="PhysicsSquareLight.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TerrainLBC.cpp" />
     <ClCompile Include="TerrainManager.cpp" />
     <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="PhysicsJoint.h" />
     <ClInclude Include="PhysicsSquare.h" />
     <ClInclude Include="PhysicsSquareLight.h" />
+    <ClInclude Include="TerrainLBC.h" />
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>

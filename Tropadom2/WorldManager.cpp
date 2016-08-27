@@ -41,13 +41,18 @@ bool WorldManager::init()
 		lightSource2 = new CircleLightSource(lightLayer, 500, 255, 0, 0);
 		((CircleLightSource*)lightSource2)->setXY(1000, 500);
 		new AboveLightSource(lightLayer);
+		/*
+		for (int i = 0; i < 11; i++)
+		{
+			CircleLightSource* tempLS = new CircleLightSource(lightLayer, 1000, 0, 0, 255);
+			tempLS->setXY(1000, 500);
+		}
+		*/
 		debugBox = new DebugBox();
 		debugBox->addField("# of LightSource", "?");
 		debugBox->addField("# of LightBlockers", "?");
 		debugBox->addField("# of AboveLightBlockers", "?");
-		//lightSource2 = new CircleLightSource(lightLayer, 800);
-		//((CircleLightSource*)lightSource)->setXY(1000, 500);
-		//((CircleLightSource*)lightSource2)->setXY(0, 0);
+		debugBox->addField("# of LightRunnables", "?");
 	}
 	terrainManager = new TerrainManager(this);
 	return true;
@@ -70,6 +75,7 @@ void WorldManager::draw()
 	terrainManager->draw();
 	if (LIGHTING_ENABLED)
 	{
+		lightLayer->dispatch();
 		lightLayer->draw();
 	}
 	if (AllegroExt::Input::InputManager::keyPressed('d'))
@@ -93,13 +99,22 @@ void WorldManager::draw()
 		worldY += SPEED * AllegroExt::Core::rate;
 	}
 	debugBox->setField("# of LightSource", std::to_string(lightLayer->getLightSourceSize()));
-	debugBox->setField("# of LightBlockers", std::to_string(lightLayer->blockerCount));
+	debugBox->setField("# of LightBlockers", std::to_string(lightLayer->getLightBlockersSize()));
 	debugBox->setField("# of AboveLightBlockers", std::to_string(lightLayer->getAboveBlockerSize()));
+	debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
 	debugBox->draw(0, 100);
 }
 
 WorldManager::~WorldManager()
 {
+	delete terrainManager;
+	terrainManager = nullptr;
+	delete lightSource;
+	lightSource = nullptr;
+	delete lightSource2;
+	lightSource2 = nullptr;
 	delete world;
 	world = nullptr;
+	delete lightLayer;
+	lightLayer = nullptr;
 }

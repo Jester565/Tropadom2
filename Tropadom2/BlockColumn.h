@@ -6,15 +6,21 @@
 class WorldManager;
 class PerlinManager;
 class AboveLightBlocker;
+class TerrainManager;
 
 class BlockColumn
 {
 public:
-	static const int BLOCKS_SIZE = AllegroExt::Graphics::WINDOW_Y/Block::BLOCK_WIDTH + 2;
+	static const int BLOCK_LIGHT_OFF = 1;
+	static const int BLOCKS_OFF = 3;
+	static const int BLOCKS_SIZE = AllegroExt::Graphics::WINDOW_Y/Block::BLOCK_WIDTH + BLOCKS_OFF * 2;
 	static const int MAX_BY = 500;
-	BlockColumn(WorldManager* wm, PerlinManager* pm, int bX, int bY);
+	BlockColumn(WorldManager* wm, TerrainManager* tm, PerlinManager* pm, int bX, int bY);
 	void draw(double x);
 	void shiftBY(int count);
+	void initLight();
+	void destroyLight();
+	Block* getBlock(int bY);
 	~BlockColumn();
 
 private:
@@ -30,5 +36,7 @@ private:
 	PerlinManager* perlinManager;
 	AboveLightBlocker* alb;
 	WorldManager* wm;
+	TerrainManager* tm;
+	bool initLightCalled;
 };
 

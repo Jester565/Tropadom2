@@ -5,6 +5,6 @@
 void main()
 {
 	BoxCore* core = new BoxCore();
-	core->setFPSCap(600); 
+	core->setFPSCap(600);
 	core->run();
 }
