@@ -16,6 +16,11 @@ public:
 
 	int getNoise(int bX, int range);
 
+	void setSeed(int64_t seed)
+	{
+		this->seed = seed;
+	}
+
 	~PerlinManager();
 
 private:

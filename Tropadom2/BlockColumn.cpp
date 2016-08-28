@@ -2,6 +2,7 @@
 #include "WorldManager.h"
 #include "PerlinManager.h"
 #include "TerrainManager.h"
+#include "CaveManager.h"
 #include <LightLayer.h>
 #include <AboveLightBlocker.h>
 #include <iostream>
@@ -9,7 +10,7 @@
 BlockColumn::BlockColumn(WorldManager* wm, TerrainManager* tm, PerlinManager* perlinManager, int bX, int bY)
 	:begin(0), end(BLOCKS_SIZE - 1), wm(wm), perlinManager(perlinManager), bX(bX), bY(bY), alb(nullptr), tm(tm), initLightCalled(false)
 {
-	groundY = perlinManager->getPerlinVal(bX, 100, 230);
+	groundY = perlinManager->getPerlinVal(bX, 100, 60);
 	airRanges.emplace_back(-1, groundY);
 	initBlocks();
 }
@@ -32,13 +33,15 @@ Block* BlockColumn::initBlock(int bY)
 			if (bY >= airRanges.at(i).first && bY <= airRanges.at(i).second)
 			{
 				air = true;
-				//return new Block(wm);
 			}
 		}
 	}
 	if (!air)
 	{
-		return new Block(wm, tm);
+		if (!tm->getCaveManager()->isAir(bX, bY))
+		{
+			return new Block(wm, tm);
+		}
 	}
 	return nullptr;
 }

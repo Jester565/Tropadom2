@@ -1,4 +1,5 @@
 #pragma once
+#include <allegro5/transformations.h>
 
 class b2World;
 class TerrainManager;
@@ -69,6 +70,13 @@ public:
 		return terrainManager;
 	}
 
+	void setZoom(float zoom);
+
+	float getZoom()
+	{
+		return zoom;
+	}
+
 	DebugBox* debugBox;
 
 	~WorldManager();
@@ -85,5 +93,8 @@ protected:
 	float yScale;
 	float worldX;
 	float worldY;
+	float zoom;
+	ALLEGRO_TRANSFORM normalTrans;
+	ALLEGRO_TRANSFORM zoomTrans;
 };
 

@@ -1,5 +1,6 @@
 #include "TerrainManager.h"
 #include "PerlinManager.h"
+#include "CaveManager.h"
 #include "BlockColumn.h"
 #include "WorldManager.h"
 #include "DebugBox.h"
@@ -8,12 +9,11 @@
 TerrainManager::TerrainManager(WorldManager* wm)
 	:begin(0), end(BLOCK_COLS_SIZE - 1), wm(wm), bX(0), bY(INITIAL_BY)
 {
+	caveManager = new CaveManager(SEED, 60, 300);
 	srand(time(NULL));
-	//perlinManager = new PerlinManager(int64_t(rand() % 10000000000));
-	groundPerlinManager = new PerlinManager(2938457264624365);
+	groundPerlinManager = new PerlinManager(SEED);
 	initBlockTextures();
 	initCols();
-
 	wm->debugBox->addField("BX", "?");
 	wm->debugBox->addField("BY", "?");
 }
@@ -26,7 +26,7 @@ void TerrainManager::initBlockTextures()
 
 BlockColumn * TerrainManager::initCol(int bX)
 {
-	return new BlockColumn(wm, this, perlinManager, bX, bY);
+	return new BlockColumn(wm, this, groundPerlinManager, bX, bY);
 }
 
 void TerrainManager::initCols()
@@ -55,6 +55,7 @@ void TerrainManager::draw()
 	{
 		x = (int)(-(abs((int)wm->getPixelWorldX()) % Block::BLOCK_WIDTH)) - Block::BLOCK_WIDTH * BLOCK_COLS_OFF;
 	}
+	//x -= (STANDARD_WIDTH / 2) * wm->getWorldScale() - (STANDARD_WIDTH / 2);
 	al_hold_bitmap_drawing(true);
 	int bIndex = begin;
 	for (int i = 0; i < BLOCK_COLS_SIZE; i++)

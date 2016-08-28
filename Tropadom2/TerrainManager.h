@@ -7,10 +7,12 @@
 class BlockColumn;
 class WorldManager;
 class PerlinManager;
+class CaveManager;
 
 class TerrainManager
 {
 public:
+	static const int SEED = 2938457264624365;
 	static const int BLOCK_COLS_LIGHT_OFF = 1;
 	static const int BLOCK_COLS_OFF = 3;
 	static const int BLOCK_COLS_SIZE = AllegroExt::Graphics::WINDOW_X/Block::BLOCK_WIDTH + BLOCK_COLS_OFF * 2;
@@ -24,6 +26,11 @@ public:
 	void translate(float dX, float dY);
 
 	Block* getBlock(int bX, int bY);
+
+	CaveManager* getCaveManager()
+	{
+		return caveManager;
+	}
 
 	AllegroExt::Graphics::Image* getTexture(int id)
 	{
@@ -45,5 +52,6 @@ protected:
 	int bX;
 	int bY;
 	WorldManager* wm;
+	CaveManager* caveManager;
 };
 

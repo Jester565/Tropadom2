@@ -14,7 +14,7 @@ const float WorldManager::DEFAULT_SCALE_X = 100;
 const float WorldManager::DEFAULT_SCALE_Y = 100;
 
 WorldManager::WorldManager()
-	:xGrav(DEFAULT_GRAV_X), yGrav(DEFAULT_GRAV_Y), xScale(DEFAULT_SCALE_X), yScale(DEFAULT_SCALE_Y), world(nullptr)
+	:xGrav(DEFAULT_GRAV_X), yGrav(DEFAULT_GRAV_Y), xScale(DEFAULT_SCALE_X), yScale(DEFAULT_SCALE_Y), world(nullptr), zoom(1)
 {
 
 }
@@ -34,20 +34,14 @@ bool WorldManager::init()
 {
 	b2Vec2 gravVec(xGrav, yGrav);
 	world = new b2World(gravVec);
+	al_identity_transform(&normalTrans);
 	if (LIGHTING_ENABLED)
 	{
 		lightLayer = new LightLayer(.25);
-		lightSource = new DirectionalLightSource(lightLayer, 1000, 60, 0, 255, 0);
-		lightSource2 = new CircleLightSource(lightLayer, 500, 255, 0, 0);
-		((CircleLightSource*)lightSource2)->setXY(1000, 500);
+		//lightLayer = new LightLayer(1);
+		//lightSource = new DirectionalLightSource(lightLayer, 1000, 60, 0, 255, 0);
+		lightSource2 = new CircleLightSource(lightLayer, 500, 200, 200, 200);
 		new AboveLightSource(lightLayer);
-		/*
-		for (int i = 0; i < 11; i++)
-		{
-			CircleLightSource* tempLS = new CircleLightSource(lightLayer, 1000, 0, 0, 255);
-			tempLS->setXY(1000, 500);
-		}
-		*/
 		debugBox = new DebugBox();
 		debugBox->addField("# of LightSource", "?");
 		debugBox->addField("# of LightBlockers", "?");
@@ -60,6 +54,15 @@ bool WorldManager::init()
 
 void WorldManager::draw()
 {
+	if (zoom != 1)
+	{
+		al_use_transform(&zoomTrans);
+	}
+	if (AllegroExt::Input::InputManager::keyPressed('u'))
+	{
+		((CircleLightSource*)lightSource2)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
+	}
+	/*
 	((DirectionalLightSource*)lightSource)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
 	if (AllegroExt::Input::InputManager::keyPressed('r'))
 	{
@@ -69,7 +72,7 @@ void WorldManager::draw()
 	{
 		((DirectionalLightSource*)lightSource)->changeDegs(-2 * AllegroExt::Core::rate);
 	}
-	
+	*/
 	world->Step(AllegroExt::Core::rate / 60, 6, 2);
 	world->ClearForces();
 	terrainManager->draw();
@@ -98,11 +101,44 @@ void WorldManager::draw()
 		terrainManager->translate(0, SPEED * AllegroExt::Core::rate);
 		worldY += SPEED * AllegroExt::Core::rate;
 	}
+	if (AllegroExt::Input::InputManager::keyPressed('z'))
+	{
+		setZoom(getZoom() - .01 * AllegroExt::Core::rate);
+	}
+	if (AllegroExt::Input::InputManager::keyPressed('x'))
+	{
+		setZoom(getZoom() + .01 * AllegroExt::Core::rate);
+	}
+	if (AllegroExt::Input::InputManager::keyPressed('c'))
+	{
+		setZoom(1);
+	}
+	if (zoom != 1)
+	{
+		al_use_transform(&normalTrans);
+	}
 	debugBox->setField("# of LightSource", std::to_string(lightLayer->getLightSourceSize()));
 	debugBox->setField("# of LightBlockers", std::to_string(lightLayer->getLightBlockersSize()));
 	debugBox->setField("# of AboveLightBlockers", std::to_string(lightLayer->getAboveBlockerSize()));
-	debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
+	//debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
 	debugBox->draw(0, 100);
+}
+
+void WorldManager::setZoom(float zoom)
+{
+	if (this->zoom != zoom)
+	{
+		this->zoom = zoom;
+		float cordOff = (zoom - 1.0) / 2.0;
+		if (zoom != 1)
+		{
+			al_build_transform(&zoomTrans, -STANDARD_WIDTH * cordOff, -STANDARD_HEIGHT * cordOff, zoom, zoom, 0);
+		}
+		else
+		{
+			al_use_transform(&normalTrans);
+		}
+	}
 }
 
 WorldManager::~WorldManager()

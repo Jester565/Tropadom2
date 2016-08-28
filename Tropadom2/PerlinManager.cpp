@@ -8,7 +8,7 @@ PerlinManager::PerlinManager(int64_t seed)
 
 int PerlinManager::getPerlinVal(int bX, int range, int minY)
 {
-	int solidBY = BlockColumn::MAX_BY - getNoise(bX, range) - minY;
+	int solidBY = getNoise(bX, range) + minY;
 	return solidBY;
 }
 

@@ -66,10 +66,10 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\Props\AllegroExt64_R.props" />
     <Import Project="..\..\..\Props\Boost64_R.props" />
     <Import Project="..\..\..\Props\Box2D64_R.props" />
     <Import Project="..\..\..\Props\AllegroLightMT64_R.props" />
+    <Import Project="..\..\..\Props\AllegroExt64_R.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,6 +125,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockColumn.cpp" />
     <ClCompile Include="BoxCore.cpp" />
+    <ClCompile Include="CaveManager.cpp" />
     <ClCompile Include="DebugBox.cpp" />
     <ClCompile Include="PerlinManager.cpp" />
     <ClCompile Include="PhysicsBody.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockColumn.h" />
     <ClInclude Include="BoxCore.h" />
+    <ClInclude Include="CaveManager.h" />
     <ClInclude Include="DebugBox.h" />
     <ClInclude Include="PerlinManager.h" />
     <ClInclude Include="PhysicsBody.h" />
