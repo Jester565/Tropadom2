@@ -1,8 +1,8 @@
 #include "PerlinManager.h"
 #include "BlockColumn.h"
 
-PerlinManager::PerlinManager(int64_t seed)
-	:seed(seed)
+PerlinManager::PerlinManager(int64_t seed, int32_t freqMax, int32_t freqMin, int32_t freqDiv, int32_t rangeDiv)
+	:seed(seed), freqMax(freqMax), freqMin(freqMin), freqDiv(freqDiv), rangeDiv(rangeDiv)
 {
 }
 
@@ -15,14 +15,14 @@ int PerlinManager::getPerlinVal(int bX, int range, int minY)
 int PerlinManager::getNoise(int bX, int range)
 {
 	int iRange = range;
-	int freq = FREQ_MAX;
+	int freq = freqMax;
 	int maxRange = 0;
 	double noiseBY = 0;
-	while (freq >= FREQ_MIN)
+	while (freq >= freqMin && range >= 1)
 	{
 		noiseBY += genPerlinNoise(bX, freq, range);
-		freq /= FREQ_DIV;
-		range /= RANGE_DIV;
+		freq /= freqDiv;
+		range /= rangeDiv;
 		maxRange += range;
 	 }
 	noiseBY *= ((double)iRange / (double)maxRange);

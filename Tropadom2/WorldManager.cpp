@@ -120,7 +120,7 @@ void WorldManager::draw()
 	debugBox->setField("# of LightSource", std::to_string(lightLayer->getLightSourceSize()));
 	debugBox->setField("# of LightBlockers", std::to_string(lightLayer->getLightBlockersSize()));
 	debugBox->setField("# of AboveLightBlockers", std::to_string(lightLayer->getAboveBlockerSize()));
-	//debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
+	debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
 	debugBox->draw(0, 100);
 }
 

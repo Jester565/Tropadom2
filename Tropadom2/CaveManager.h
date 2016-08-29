@@ -9,7 +9,7 @@ public:
 	static const int MAX_CAVE_LENGTH = 399;
 	static const int MIN_CAVE_LENGTH = 50;
 	static const int CAVE_CREATE_X = 100;
-	static const int CAVE_MAX_R = 10;
+	static const int CAVE_MAX_R = 9;
 	CaveManager(int worldSeed, int caveMinY, int caveMaxY);
 
 	bool isAir(int bX, int bY);

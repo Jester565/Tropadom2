@@ -8,7 +8,7 @@ class TerrainManager;
 class Block
 {
 public:
-	static const int BLOCK_WIDTH = 20;
+	static const int BLOCK_WIDTH = 35;
 	Block(WorldManager* wm, TerrainManager* tm);
 
 	void initLight(Block* n, Block* e, Block* s, Block* w);
