@@ -41,8 +41,6 @@ void Block::initLight(Block* n, Block* e, Block* s, Block* w)
 	{
 		lbc->addLine(0, BLOCK_WIDTH, 0, 0);
 	}
-	
-	//lbc->initSquare(BLOCK_WIDTH, BLOCK_WIDTH);
 }
 
 void Block::draw(double x, double y)
@@ -52,7 +50,6 @@ void Block::draw(double x, double y)
 		lbc->setXY(x, y);
 	}
 	texture->draw(x, y);
-	//AllegroExt::Graphics::ShapeRenderer::drawRectangle(x, y, BLOCK_WIDTH, BLOCK_WIDTH, 255, 0, 0, 255);
 }
 
 

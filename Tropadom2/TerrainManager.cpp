@@ -20,7 +20,6 @@ TerrainManager::TerrainManager(WorldManager* wm)
 
 void TerrainManager::initBlockTextures()
 {
-	AllegroExt::Graphics::Image::SetPrePath("C:\\Users\\ajcra\\Desktop\\wdir\\trop2\\");
 	blockTextures.push_back(new AllegroExt::Graphics::Image("block.png", Block::BLOCK_WIDTH, Block::BLOCK_WIDTH));
 }
 

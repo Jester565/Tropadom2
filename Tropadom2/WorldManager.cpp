@@ -38,13 +38,11 @@ bool WorldManager::init()
 	if (LIGHTING_ENABLED)
 	{
 		lightLayer = new LightLayer(.25);
-		//lightLayer = new LightLayer(1);
-		//lightSource = new DirectionalLightSource(lightLayer, 1000, 60, 0, 255, 0);
 		lightSource2 = new CircleLightSource(lightLayer, 500, 200, 200, 200);
 		new AboveLightSource(lightLayer);
 		debugBox = new DebugBox();
 		debugBox->addField("# of LightSource", "?");
-		debugBox->addField("# of LightBlockers", "?");
+		debugBox->addField("# of LightBlockers", " ?");
 		debugBox->addField("# of AboveLightBlockers", "?");
 		debugBox->addField("# of LightRunnables", "?");
 	}
@@ -62,19 +60,8 @@ void WorldManager::draw()
 	{
 		((CircleLightSource*)lightSource2)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
 	}
-	/*
-	((DirectionalLightSource*)lightSource)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
-	if (AllegroExt::Input::InputManager::keyPressed('r'))
-	{
-		((DirectionalLightSource*)lightSource)->changeDegs(2 * AllegroExt::Core::rate);
-	}
-	if (AllegroExt::Input::InputManager::keyPressed('f'))
-	{
-		((DirectionalLightSource*)lightSource)->changeDegs(-2 * AllegroExt::Core::rate);
-	}
-	*/
 	world->Step(AllegroExt::Core::rate / 60, 6, 2);
-	world->ClearForces();
+	world->ClearForces(); 
 	terrainManager->draw();
 	if (LIGHTING_ENABLED)
 	{

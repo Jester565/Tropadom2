@@ -70,6 +70,8 @@
     <Import Project="..\..\..\Props\Box2D64_R.props" />
     <Import Project="..\..\..\Props\AllegroLightMT64_R.props" />
     <Import Project="..\..\..\Props\AllegroExt64_R.props" />
+    <Import Project="..\..\..\Props\CppClient64_R.props" />
+    <Import Project="..\..\..\Props\Protobuf64_R.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,6 +121,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>CPP_Client2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -127,6 +130,13 @@
     <ClCompile Include="BoxCore.cpp" />
     <ClCompile Include="CaveManager.cpp" />
     <ClCompile Include="DebugBox.cpp" />
+    <ClCompile Include="InternetManager.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="OnlineBlockColumn.cpp" />
+    <ClCompile Include="OnlineTerrainManager.cpp" />
+    <ClCompile Include="Packets\Trop.pb.cc" />
+    <ClCompile Include="Peer.cpp" />
+    <ClCompile Include="PeerManager.cpp" />
     <ClCompile Include="PerlinManager.cpp" />
     <ClCompile Include="PhysicsBody.cpp" />
     <ClCompile Include="PhysicsBodyLight.cpp" />
@@ -136,6 +146,8 @@
     <ClCompile Include="PhysicsJoint.cpp" />
     <ClCompile Include="PhysicsSquare.cpp" />
     <ClCompile Include="PhysicsSquareLight.cpp" />
+    <ClCompile Include="Pinger.cpp" />
+    <ClCompile Include="Profile.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TerrainLBC.cpp" />
     <ClCompile Include="TerrainManager.cpp" />
@@ -147,6 +159,13 @@
     <ClInclude Include="BoxCore.h" />
     <ClInclude Include="CaveManager.h" />
     <ClInclude Include="DebugBox.h" />
+    <ClInclude Include="InternetManager.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="OnlineBlockColumn.h" />
+    <ClInclude Include="OnlineTerrainManager.h" />
+    <ClInclude Include="Packets\Trop.pb.h" />
+    <ClInclude Include="Peer.h" />
+    <ClInclude Include="PeerManager.h" />
     <ClInclude Include="PerlinManager.h" />
     <ClInclude Include="PhysicsBody.h" />
     <ClInclude Include="PhysicsBodyLight.h" />
@@ -156,6 +175,8 @@
     <ClInclude Include="PhysicsJoint.h" />
     <ClInclude Include="PhysicsSquare.h" />
     <ClInclude Include="PhysicsSquareLight.h" />
+    <ClInclude Include="Pinger.h" />
+    <ClInclude Include="Profile.h" />
     <ClInclude Include="TerrainLBC.h" />
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="WorldManager.h" />

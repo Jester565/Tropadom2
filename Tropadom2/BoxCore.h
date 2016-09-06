@@ -6,11 +6,13 @@ using namespace AllegroExt;
 
 class WorldManager;
 class LightLayer;
+class MainMenu;
+class InternetManager;
 
 class BoxCore : public Core
 {
 public:
-	BoxCore();
+	BoxCore(const std::string& resourcePath);
 
 	WorldManager* getWorldManager()
 	{
@@ -29,6 +31,8 @@ protected:
 	void draw() override;
 	LightLayer* lightLayer;
 	WorldManager* worldManager;
+	InternetManager* internetManager;
+	MainMenu* mainMenu;
 	AllegroExt::FPSLogger* fpsLogger;
 };
 
