@@ -177,6 +177,7 @@
     <ClInclude Include="PhysicsSquareLight.h" />
     <ClInclude Include="Pinger.h" />
     <ClInclude Include="Profile.h" />
+    <ClInclude Include="TerrainConstants.h" />
     <ClInclude Include="TerrainLBC.h" />
     <ClInclude Include="TerrainManager.h" />
     <ClInclude Include="WorldManager.h" />

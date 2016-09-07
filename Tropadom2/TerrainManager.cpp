@@ -7,7 +7,7 @@
 #include <time.h>
 
 TerrainManager::TerrainManager(WorldManager* wm)
-	:begin(0), end(BLOCK_COLS_SIZE - 1), wm(wm), bX(0), bY(INITIAL_BY)
+	:begin(0), end(BLOCK_LOAD_BW - 1), wm(wm), bX(0), bY(INITIAL_BY)
 {
 	caveManager = new CaveManager(SEED, 60, 300);
 	srand(time(NULL));
@@ -20,7 +20,8 @@ TerrainManager::TerrainManager(WorldManager* wm)
 
 void TerrainManager::initBlockTextures()
 {
-	blockTextures.push_back(new AllegroExt::Graphics::Image("block.png", Block::BLOCK_WIDTH, Block::BLOCK_WIDTH));
+	blockTextures.push_back(new AllegroExt::Graphics::Image("block.png", BLOCK_WIDTH, BLOCK_WIDTH));
+	blockTextures.push_back(new AllegroExt::Graphics::Image("block2.png", BLOCK_WIDTH, BLOCK_WIDTH));
 }
 
 BlockColumn * TerrainManager::initCol(int bX)
@@ -30,11 +31,11 @@ BlockColumn * TerrainManager::initCol(int bX)
 
 void TerrainManager::initCols()
 {
-	for (int i = 0; i < BLOCK_COLS_SIZE; i++)
+	for (int i = 0; i < BLOCK_LOAD_BW; i++)
 	{
 		BlockColumn* blockColumn = initCol(bX + i);
 		blockCols.push_back(blockColumn);
-		if (i > BLOCK_COLS_LIGHT_OFF && i <= BLOCK_COLS_SIZE - BLOCK_COLS_LIGHT_OFF)
+		if (i >= BLOCK_LIGHT_OFF_BW + 1 && i <= BLOCK_LOAD_BW - BLOCK_LIGHT_OFF_BW)
 		{
 			blockCols.at(blockCols.size() - 2)->initLight();
 		}
@@ -43,37 +44,73 @@ void TerrainManager::initCols()
 
 void TerrainManager::draw()
 {
-	wm->debugBox->setField("BX", std::to_string(bX));
-	wm->debugBox->setField("BY", std::to_string(bY));
-	double x;
-	if (wm->getPixelWorldX() < 0)
+	for (int j = 1; j <= blockTextures.size(); j++)
 	{
-		x = (int)(-wm->getPixelWorldX()) % Block::BLOCK_WIDTH - Block::BLOCK_WIDTH * (BLOCK_COLS_OFF + 1);
-	}
-	else
-	{
-		x = (int)(-(abs((int)wm->getPixelWorldX()) % Block::BLOCK_WIDTH)) - Block::BLOCK_WIDTH * BLOCK_COLS_OFF;
-	}
-	//x -= (STANDARD_WIDTH / 2) * wm->getWorldScale() - (STANDARD_WIDTH / 2);
-	al_hold_bitmap_drawing(true);
-	int bIndex = begin;
-	for (int i = 0; i < BLOCK_COLS_SIZE; i++)
-	{
-		blockCols.at(bIndex)->draw(x);
-		x += Block::BLOCK_WIDTH;
-		bIndex++;
-		if (bIndex >= BLOCK_COLS_SIZE)
+		double x;
+		if (wm->getPixelWorldX() < 0)
 		{
-			bIndex = 0;
+			x = (int)(-wm->getPixelWorldX()) % BLOCK_WIDTH - BLOCK_WIDTH * (BLOCK_DRAW_OFF + BLOCK_LIGHT_OFF + 1);
 		}
+		else
+		{
+			x = (int)(-(abs((int)wm->getPixelWorldX()) % BLOCK_WIDTH)) - BLOCK_WIDTH * (BLOCK_DRAW_OFF + BLOCK_LIGHT_OFF);
+		}
+		al_hold_bitmap_drawing(true);
+		int bIndex = (begin + BLOCK_LIGHT_OFF_BW) % BLOCK_LOAD_BW;
+		for (int i = 0; i < BLOCK_DRAW_BW + BLOCK_LIGHT_OFF * 2; i++)
+		{
+			if (i > BLOCK_LIGHT_OFF && i <= BLOCK_DRAW_BW + BLOCK_LIGHT_OFF)
+			{
+				blockCols.at(bIndex)->draw(x, j);
+			}
+			else if (j == 1)
+			{
+				blockCols.at(bIndex)->updateLBC(x);
+			}
+			x += BLOCK_WIDTH;
+			bIndex++;
+			if (bIndex >= BLOCK_LOAD_BW)
+			{
+				bIndex = 0;
+			}
+		}
+		al_hold_bitmap_drawing(false);
 	}
-	al_hold_bitmap_drawing(false);
+}
+
+void TerrainManager::drawLBDebug()
+{
+	for (int j = 1; j <= blockTextures.size(); j++)
+	{
+		double x;
+		if (wm->getPixelWorldX() < 0)
+		{
+			x = (int)(-wm->getPixelWorldX()) % BLOCK_WIDTH - BLOCK_WIDTH * (BLOCK_OFF_BW + BLOCK_DRAW_OFF + 1);
+		}
+		else
+		{
+			x = (int)(-(abs((int)wm->getPixelWorldX()) % BLOCK_WIDTH)) - BLOCK_WIDTH * (BLOCK_OFF_BW + BLOCK_DRAW_OFF);
+		}
+		al_hold_bitmap_drawing(true);
+		int bIndex = begin;
+		for (int i = 0; i < BLOCK_LOAD_BW; i++)
+		{
+			blockCols.at(bIndex)->drawLBDebug(x, j);
+			x += BLOCK_WIDTH;
+			bIndex++;
+			if (bIndex >= BLOCK_LOAD_BW)
+			{
+				bIndex = 0;
+			}
+		}
+		al_hold_bitmap_drawing(false);
+	}
 }
 
 void TerrainManager::translate(float dX, float dY)
 {
-	double changeBX = (wm->getPixelWorldX() + dX) / Block::BLOCK_WIDTH;
-	double currentBX = (wm->getPixelWorldX()) / Block::BLOCK_WIDTH;
+	double changeBX = (wm->getPixelWorldX() + dX) / BLOCK_WIDTH;
+	double currentBX = (wm->getPixelWorldX()) / BLOCK_WIDTH;
 	if (changeBX < 0)
 	{
 		changeBX--;
@@ -86,8 +123,8 @@ void TerrainManager::translate(float dX, float dY)
 	{
 		shiftBX(((int)changeBX - (int)currentBX));
 	}
-	double changeBY = (wm->getPixelWorldY() + dY) / Block::BLOCK_WIDTH;
-	double currentBY = (wm->getPixelWorldY()) / Block::BLOCK_WIDTH;
+	double changeBY = (wm->getPixelWorldY() + dY) / BLOCK_WIDTH;
+	double currentBY = (wm->getPixelWorldY()) / BLOCK_WIDTH;
 	if (changeBY < 0)
 	{
 		changeBY--;
@@ -99,7 +136,7 @@ void TerrainManager::translate(float dX, float dY)
 	if ((int)changeBY - (int)currentBY != 0)
 	{
 		shiftBY((int)changeBY - (int)currentBY);
-	} 
+	}
 }
 
 TerrainManager::~TerrainManager()
@@ -110,11 +147,11 @@ Block * TerrainManager::getBlock(int searchBX, int searchBY)
 {
 	int colI = searchBX - bX;
 	colI += begin;
-	if (colI >= BLOCK_COLS_SIZE)
+	if (colI >= BLOCK_LOAD_BW)
 	{
-		colI -= BLOCK_COLS_SIZE;
+		colI -= BLOCK_LOAD_BW;
 	}
-	if (colI < BLOCK_COLS_SIZE && colI >= 0)
+	if (colI < BLOCK_LOAD_BW && colI >= 0)
 	{
 		return blockCols.at(colI)->getBlock(searchBY);
 	}
@@ -125,19 +162,19 @@ void TerrainManager::shiftBX(int count)
 {
 	for (int i = 0; i < abs(count); i++)
 	{
-		begin += count/abs(count);
+		begin += count / abs(count);
 		bX += count / abs(count);
-		if (begin >= BLOCK_COLS_SIZE)
+		if (begin >= BLOCK_LOAD_BW)
 		{
 			begin = 0;
 		}
 		if (begin < 0)
 		{
-			begin = BLOCK_COLS_SIZE - 1;
+			begin = BLOCK_LOAD_BW - 1;
 		}
 		if (begin == 0)
 		{
-			end = BLOCK_COLS_SIZE - 1;
+			end = BLOCK_LOAD_BW - 1;
 		}
 		else
 		{
@@ -147,23 +184,33 @@ void TerrainManager::shiftBX(int count)
 		{
 			delete blockCols.at(begin);
 			blockCols.at(begin) = initCol(bX);
-			blockCols.at(end)->destroyLight();
-			int lbInit = begin + 1;
-			if (lbInit >= BLOCK_COLS_SIZE)
+			int lightDestroyI = end - BLOCK_LIGHT_OFF_BW + 1;
+			if (lightDestroyI < 0)
 			{
-				lbInit = 0;
+				lightDestroyI += BLOCK_LOAD_BW;
+			}
+			blockCols.at(lightDestroyI)->destroyLight();
+			int lbInit = begin + BLOCK_LIGHT_OFF_BW;
+			if (lbInit >= BLOCK_LOAD_BW)
+			{
+				lbInit -= BLOCK_LOAD_BW;
 			}
 			blockCols.at(lbInit)->initLight();
 		}
 		else
 		{
 			delete blockCols.at(end);
-			blockCols.at(end) = initCol(bX + BLOCK_COLS_SIZE - 1);
-			blockCols.at(begin)->destroyLight();
-			int lbInit = end - 1;
+			blockCols.at(end) = initCol(bX + BLOCK_LOAD_BW - 1);
+			int lightDestroyI = begin + BLOCK_LIGHT_OFF_BW - 1;
+			if (lightDestroyI >= BLOCK_LOAD_BW)
+			{
+				lightDestroyI -= BLOCK_LOAD_BW;
+			}
+			blockCols.at(lightDestroyI)->destroyLight();
+			int lbInit = end - BLOCK_LIGHT_OFF_BW;
 			if (lbInit < 0)
 			{
-				lbInit = BLOCK_COLS_SIZE - 1;
+				lbInit += BLOCK_LOAD_BW;
 			}
 			blockCols.at(lbInit)->initLight();
 		}
@@ -173,7 +220,7 @@ void TerrainManager::shiftBX(int count)
 void TerrainManager::shiftBY(int count)
 {
 	bY += count;
-	for (int i = 0; i < BLOCK_COLS_SIZE; i++)
+	for (int i = 0; i < BLOCK_LOAD_BW; i++)
 	{
 		blockCols.at(i)->shiftBY(count);
 	}

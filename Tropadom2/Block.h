@@ -8,18 +8,22 @@ class TerrainManager;
 class Block
 {
 public:
-	static const int BLOCK_WIDTH = 35;
 	Block(WorldManager* wm, TerrainManager* tm);
 
 	void initLight(Block* n, Block* e, Block* s, Block* w);
 
-	void draw(double x, double y);
+	void draw(double x, double y, uint8_t textureID);
+
+	void updateLBCPos(double x, double y);
+
+	void destroyLBC();
 
 	~Block();
 
 	LightBlockerContainer* lbc;
 
 private:
+	uint8_t textureID;
 	bool firstDraw;
 	WorldManager* wm;
 	TerrainManager* tm;

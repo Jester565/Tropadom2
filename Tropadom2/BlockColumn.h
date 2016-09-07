@@ -1,5 +1,6 @@
 #pragma once
 #include "Block.h"
+#include "TerrainConstants.h"
 #include <DisplayManager.h>
 #include <vector>
 
@@ -11,12 +12,11 @@ class TerrainManager;
 class BlockColumn
 {
 public:
-	static const int BLOCK_LIGHT_OFF = 1;
-	static const int BLOCKS_OFF = 3;
-	static const int BLOCKS_SIZE = AllegroExt::Graphics::WINDOW_Y/Block::BLOCK_WIDTH + BLOCKS_OFF * 2;
-	static const int MAX_BY = 500;
+
 	BlockColumn(WorldManager* wm, TerrainManager* tm, PerlinManager* pm, int bX, int bY);
-	void draw(double x);
+	void draw(double x, uint8_t textureID);
+	void updateLBC(double x);
+	void drawLBDebug(double x, uint8_t textureID);
 	void shiftBY(int count);
 	void initLight();
 	void destroyLight();

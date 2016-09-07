@@ -61,7 +61,7 @@ void WorldManager::draw()
 		((CircleLightSource*)lightSource2)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
 	}
 	world->Step(AllegroExt::Core::rate / 60, 6, 2);
-	world->ClearForces(); 
+	world->ClearForces();
 	terrainManager->draw();
 	if (LIGHTING_ENABLED)
 	{

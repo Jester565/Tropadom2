@@ -13,7 +13,6 @@ class BlockColumn
 {
 public:
 	static const int BLOCK_LIGHT_OFF = 1;
-	static const int BLOCKS_OFF = 3;
 	static const int BLOCK_DRAW_BH = AllegroExt::Graphics::WINDOW_Y / Block::BLOCK_WIDTH + BLOCKS_OFF * 2;
 	static const int MAX_BY = 500;
 	BlockColumn(WorldManager* wm, TerrainManager* tm, PerlinManager* pm, int bX, int bY);

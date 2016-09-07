@@ -1,4 +1,5 @@
 #pragma once
+#include "TerrainConstants.h"
 #include "Block.h"
 #include <DisplayManager.h>
 #include <Image.h>
@@ -12,16 +13,14 @@ class CaveManager;
 class TerrainManager
 {
 public:
-	static const int SEED = 2938457264624365;
-	static const int BLOCK_COLS_LIGHT_OFF = 1;
-	static const int BLOCK_COLS_OFF = 3;
-	static const int BLOCK_COLS_SIZE = AllegroExt::Graphics::WINDOW_X/Block::BLOCK_WIDTH + BLOCK_COLS_OFF * 2;
-	static const int INITIAL_BY = 200;
+	
 	TerrainManager(WorldManager* wm);
 
 	void initBlockTextures();
 
 	void draw();
+
+	void drawLBDebug();
 
 	void translate(float dX, float dY);
 

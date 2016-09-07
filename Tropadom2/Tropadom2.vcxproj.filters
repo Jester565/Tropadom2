@@ -176,6 +176,9 @@
     <ClInclude Include="OnlineBlockColumn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TerrainConstants.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
