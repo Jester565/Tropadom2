@@ -45,6 +45,11 @@ class PackC0;
 class PackC1;
 class PackC2;
 class PackC3;
+class PackD0;
+class PackD1;
+class PackE0;
+class PackF0;
+class PackG0;
 
 // ===================================================================
 
@@ -193,12 +198,26 @@ class PackB0 : public ::google::protobuf::Message {
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // optional float mX = 2;
+  void clear_mx();
+  static const int kMXFieldNumber = 2;
+  float mx() const;
+  void set_mx(float value);
+
+  // optional float mY = 3;
+  void clear_my();
+  static const int kMYFieldNumber = 3;
+  float my() const;
+  void set_my(float value);
+
   // @@protoc_insertion_point(class_scope:TropPackets.PackB0)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  float mx_;
+  float my_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_Trop_2eproto();
   friend void protobuf_AssignDesc_Trop_2eproto();
@@ -432,12 +451,26 @@ class PackB3 : public ::google::protobuf::Message {
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // optional float mX = 2;
+  void clear_mx();
+  static const int kMXFieldNumber = 2;
+  float mx() const;
+  void set_mx(float value);
+
+  // optional float mY = 3;
+  void clear_my();
+  static const int kMYFieldNumber = 3;
+  float my() const;
+  void set_my(float value);
+
   // @@protoc_insertion_point(class_scope:TropPackets.PackB3)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  float mx_;
+  float my_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_Trop_2eproto();
   friend void protobuf_AssignDesc_Trop_2eproto();
@@ -601,6 +634,18 @@ class PackC1 : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_blockarr();
 
+  // repeated uint32 groundYs = 2 [packed = true];
+  int groundys_size() const;
+  void clear_groundys();
+  static const int kGroundYsFieldNumber = 2;
+  ::google::protobuf::uint32 groundys(int index) const;
+  void set_groundys(int index, ::google::protobuf::uint32 value);
+  void add_groundys(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      groundys() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_groundys();
+
   // @@protoc_insertion_point(class_scope:TropPackets.PackC1)
  private:
 
@@ -608,6 +653,8 @@ class PackC1 : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > blockarr_;
   mutable int _blockarr_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > groundys_;
+  mutable int _groundys_cached_byte_size_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_Trop_2eproto();
   friend void protobuf_AssignDesc_Trop_2eproto();
@@ -789,6 +836,12 @@ class PackC3 : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_blockarr();
 
+  // optional uint32 groundY = 5;
+  void clear_groundy();
+  static const int kGroundYFieldNumber = 5;
+  ::google::protobuf::uint32 groundy() const;
+  void set_groundy(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:TropPackets.PackC3)
  private:
 
@@ -799,6 +852,7 @@ class PackC3 : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > blockarr_;
   mutable int _blockarr_cached_byte_size_;
   bool horizontal_;
+  ::google::protobuf::uint32 groundy_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_Trop_2eproto();
   friend void protobuf_AssignDesc_Trop_2eproto();
@@ -806,6 +860,464 @@ class PackC3 : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static PackC3* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PackD0 : public ::google::protobuf::Message {
+ public:
+  PackD0();
+  virtual ~PackD0();
+
+  PackD0(const PackD0& from);
+
+  inline PackD0& operator=(const PackD0& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PackD0& default_instance();
+
+  void Swap(PackD0* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PackD0* New() const { return New(NULL); }
+
+  PackD0* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PackD0& from);
+  void MergeFrom(const PackD0& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PackD0* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 bX = 1;
+  void clear_bx();
+  static const int kBXFieldNumber = 1;
+  ::google::protobuf::int64 bx() const;
+  void set_bx(::google::protobuf::int64 value);
+
+  // optional int64 bY = 2;
+  void clear_by();
+  static const int kBYFieldNumber = 2;
+  ::google::protobuf::int64 by() const;
+  void set_by(::google::protobuf::int64 value);
+
+  // optional uint32 type = 3;
+  void clear_type();
+  static const int kTypeFieldNumber = 3;
+  ::google::protobuf::uint32 type() const;
+  void set_type(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:TropPackets.PackD0)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 bx_;
+  ::google::protobuf::int64 by_;
+  ::google::protobuf::uint32 type_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_Trop_2eproto();
+  friend void protobuf_AssignDesc_Trop_2eproto();
+  friend void protobuf_ShutdownFile_Trop_2eproto();
+
+  void InitAsDefaultInstance();
+  static PackD0* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PackD1 : public ::google::protobuf::Message {
+ public:
+  PackD1();
+  virtual ~PackD1();
+
+  PackD1(const PackD1& from);
+
+  inline PackD1& operator=(const PackD1& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PackD1& default_instance();
+
+  void Swap(PackD1* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PackD1* New() const { return New(NULL); }
+
+  PackD1* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PackD1& from);
+  void MergeFrom(const PackD1& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PackD1* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 bX = 1;
+  void clear_bx();
+  static const int kBXFieldNumber = 1;
+  ::google::protobuf::int64 bx() const;
+  void set_bx(::google::protobuf::int64 value);
+
+  // optional uint32 groundY = 2;
+  void clear_groundy();
+  static const int kGroundYFieldNumber = 2;
+  ::google::protobuf::uint32 groundy() const;
+  void set_groundy(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:TropPackets.PackD1)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 bx_;
+  ::google::protobuf::uint32 groundy_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_Trop_2eproto();
+  friend void protobuf_AssignDesc_Trop_2eproto();
+  friend void protobuf_ShutdownFile_Trop_2eproto();
+
+  void InitAsDefaultInstance();
+  static PackD1* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PackE0 : public ::google::protobuf::Message {
+ public:
+  PackE0();
+  virtual ~PackE0();
+
+  PackE0(const PackE0& from);
+
+  inline PackE0& operator=(const PackE0& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PackE0& default_instance();
+
+  void Swap(PackE0* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PackE0* New() const { return New(NULL); }
+
+  PackE0* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PackE0& from);
+  void MergeFrom(const PackE0& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PackE0* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 bX = 1;
+  void clear_bx();
+  static const int kBXFieldNumber = 1;
+  ::google::protobuf::int64 bx() const;
+  void set_bx(::google::protobuf::int64 value);
+
+  // repeated uint32 blockTypes = 2;
+  int blocktypes_size() const;
+  void clear_blocktypes();
+  static const int kBlockTypesFieldNumber = 2;
+  ::google::protobuf::uint32 blocktypes(int index) const;
+  void set_blocktypes(int index, ::google::protobuf::uint32 value);
+  void add_blocktypes(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      blocktypes() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_blocktypes();
+
+  // @@protoc_insertion_point(class_scope:TropPackets.PackE0)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 bx_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > blocktypes_;
+  mutable int _blocktypes_cached_byte_size_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_Trop_2eproto();
+  friend void protobuf_AssignDesc_Trop_2eproto();
+  friend void protobuf_ShutdownFile_Trop_2eproto();
+
+  void InitAsDefaultInstance();
+  static PackE0* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PackF0 : public ::google::protobuf::Message {
+ public:
+  PackF0();
+  virtual ~PackF0();
+
+  PackF0(const PackF0& from);
+
+  inline PackF0& operator=(const PackF0& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PackF0& default_instance();
+
+  void Swap(PackF0* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PackF0* New() const { return New(NULL); }
+
+  PackF0* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PackF0& from);
+  void MergeFrom(const PackF0& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PackF0* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string msg = 1;
+  void clear_msg();
+  static const int kMsgFieldNumber = 1;
+  const ::std::string& msg() const;
+  void set_msg(const ::std::string& value);
+  void set_msg(const char* value);
+  void set_msg(const char* value, size_t size);
+  ::std::string* mutable_msg();
+  ::std::string* release_msg();
+  void set_allocated_msg(::std::string* msg);
+
+  // optional uint32 chatType = 2;
+  void clear_chattype();
+  static const int kChatTypeFieldNumber = 2;
+  ::google::protobuf::uint32 chattype() const;
+  void set_chattype(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:TropPackets.PackF0)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr msg_;
+  ::google::protobuf::uint32 chattype_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_Trop_2eproto();
+  friend void protobuf_AssignDesc_Trop_2eproto();
+  friend void protobuf_ShutdownFile_Trop_2eproto();
+
+  void InitAsDefaultInstance();
+  static PackF0* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PackG0 : public ::google::protobuf::Message {
+ public:
+  PackG0();
+  virtual ~PackG0();
+
+  PackG0(const PackG0& from);
+
+  inline PackG0& operator=(const PackG0& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PackG0& default_instance();
+
+  void Swap(PackG0* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PackG0* New() const { return New(NULL); }
+
+  PackG0* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PackG0& from);
+  void MergeFrom(const PackG0& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PackG0* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional float mX = 1;
+  void clear_mx();
+  static const int kMXFieldNumber = 1;
+  float mx() const;
+  void set_mx(float value);
+
+  // optional float mY = 2;
+  void clear_my();
+  static const int kMYFieldNumber = 2;
+  float my() const;
+  void set_my(float value);
+
+  // optional float mVX = 3;
+  void clear_mvx();
+  static const int kMVXFieldNumber = 3;
+  float mvx() const;
+  void set_mvx(float value);
+
+  // optional float mVY = 4;
+  void clear_mvy();
+  static const int kMVYFieldNumber = 4;
+  float mvy() const;
+  void set_mvy(float value);
+
+  // @@protoc_insertion_point(class_scope:TropPackets.PackG0)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  float mx_;
+  float my_;
+  float mvx_;
+  float mvy_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_Trop_2eproto();
+  friend void protobuf_AssignDesc_Trop_2eproto();
+  friend void protobuf_ShutdownFile_Trop_2eproto();
+
+  void InitAsDefaultInstance();
+  static PackG0* default_instance_;
 };
 // ===================================================================
 
@@ -874,6 +1386,34 @@ inline void PackB0::set_allocated_name(::std::string* name) {
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
   // @@protoc_insertion_point(field_set_allocated:TropPackets.PackB0.name)
+}
+
+// optional float mX = 2;
+inline void PackB0::clear_mx() {
+  mx_ = 0;
+}
+inline float PackB0::mx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackB0.mX)
+  return mx_;
+}
+inline void PackB0::set_mx(float value) {
+  
+  mx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackB0.mX)
+}
+
+// optional float mY = 3;
+inline void PackB0::clear_my() {
+  my_ = 0;
+}
+inline float PackB0::my() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackB0.mY)
+  return my_;
+}
+inline void PackB0::set_my(float value) {
+  
+  my_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackB0.mY)
 }
 
 // -------------------------------------------------------------------
@@ -959,6 +1499,34 @@ inline void PackB3::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:TropPackets.PackB3.name)
 }
 
+// optional float mX = 2;
+inline void PackB3::clear_mx() {
+  mx_ = 0;
+}
+inline float PackB3::mx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackB3.mX)
+  return mx_;
+}
+inline void PackB3::set_mx(float value) {
+  
+  mx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackB3.mX)
+}
+
+// optional float mY = 3;
+inline void PackB3::clear_my() {
+  my_ = 0;
+}
+inline float PackB3::my() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackB3.mY)
+  return my_;
+}
+inline void PackB3::set_my(float value) {
+  
+  my_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackB3.mY)
+}
+
 // -------------------------------------------------------------------
 
 // PackC0
@@ -1023,6 +1591,36 @@ inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
 PackC1::mutable_blockarr() {
   // @@protoc_insertion_point(field_mutable_list:TropPackets.PackC1.blockArr)
   return &blockarr_;
+}
+
+// repeated uint32 groundYs = 2 [packed = true];
+inline int PackC1::groundys_size() const {
+  return groundys_.size();
+}
+inline void PackC1::clear_groundys() {
+  groundys_.Clear();
+}
+inline ::google::protobuf::uint32 PackC1::groundys(int index) const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackC1.groundYs)
+  return groundys_.Get(index);
+}
+inline void PackC1::set_groundys(int index, ::google::protobuf::uint32 value) {
+  groundys_.Set(index, value);
+  // @@protoc_insertion_point(field_set:TropPackets.PackC1.groundYs)
+}
+inline void PackC1::add_groundys(::google::protobuf::uint32 value) {
+  groundys_.Add(value);
+  // @@protoc_insertion_point(field_add:TropPackets.PackC1.groundYs)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+PackC1::groundys() const {
+  // @@protoc_insertion_point(field_list:TropPackets.PackC1.groundYs)
+  return groundys_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+PackC1::mutable_groundys() {
+  // @@protoc_insertion_point(field_mutable_list:TropPackets.PackC1.groundYs)
+  return &groundys_;
 }
 
 // -------------------------------------------------------------------
@@ -1133,7 +1731,278 @@ PackC3::mutable_blockarr() {
   return &blockarr_;
 }
 
+// optional uint32 groundY = 5;
+inline void PackC3::clear_groundy() {
+  groundy_ = 0u;
+}
+inline ::google::protobuf::uint32 PackC3::groundy() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackC3.groundY)
+  return groundy_;
+}
+inline void PackC3::set_groundy(::google::protobuf::uint32 value) {
+  
+  groundy_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackC3.groundY)
+}
+
+// -------------------------------------------------------------------
+
+// PackD0
+
+// optional int64 bX = 1;
+inline void PackD0::clear_bx() {
+  bx_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PackD0::bx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackD0.bX)
+  return bx_;
+}
+inline void PackD0::set_bx(::google::protobuf::int64 value) {
+  
+  bx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackD0.bX)
+}
+
+// optional int64 bY = 2;
+inline void PackD0::clear_by() {
+  by_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PackD0::by() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackD0.bY)
+  return by_;
+}
+inline void PackD0::set_by(::google::protobuf::int64 value) {
+  
+  by_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackD0.bY)
+}
+
+// optional uint32 type = 3;
+inline void PackD0::clear_type() {
+  type_ = 0u;
+}
+inline ::google::protobuf::uint32 PackD0::type() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackD0.type)
+  return type_;
+}
+inline void PackD0::set_type(::google::protobuf::uint32 value) {
+  
+  type_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackD0.type)
+}
+
+// -------------------------------------------------------------------
+
+// PackD1
+
+// optional int64 bX = 1;
+inline void PackD1::clear_bx() {
+  bx_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PackD1::bx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackD1.bX)
+  return bx_;
+}
+inline void PackD1::set_bx(::google::protobuf::int64 value) {
+  
+  bx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackD1.bX)
+}
+
+// optional uint32 groundY = 2;
+inline void PackD1::clear_groundy() {
+  groundy_ = 0u;
+}
+inline ::google::protobuf::uint32 PackD1::groundy() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackD1.groundY)
+  return groundy_;
+}
+inline void PackD1::set_groundy(::google::protobuf::uint32 value) {
+  
+  groundy_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackD1.groundY)
+}
+
+// -------------------------------------------------------------------
+
+// PackE0
+
+// optional int64 bX = 1;
+inline void PackE0::clear_bx() {
+  bx_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PackE0::bx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackE0.bX)
+  return bx_;
+}
+inline void PackE0::set_bx(::google::protobuf::int64 value) {
+  
+  bx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackE0.bX)
+}
+
+// repeated uint32 blockTypes = 2;
+inline int PackE0::blocktypes_size() const {
+  return blocktypes_.size();
+}
+inline void PackE0::clear_blocktypes() {
+  blocktypes_.Clear();
+}
+inline ::google::protobuf::uint32 PackE0::blocktypes(int index) const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackE0.blockTypes)
+  return blocktypes_.Get(index);
+}
+inline void PackE0::set_blocktypes(int index, ::google::protobuf::uint32 value) {
+  blocktypes_.Set(index, value);
+  // @@protoc_insertion_point(field_set:TropPackets.PackE0.blockTypes)
+}
+inline void PackE0::add_blocktypes(::google::protobuf::uint32 value) {
+  blocktypes_.Add(value);
+  // @@protoc_insertion_point(field_add:TropPackets.PackE0.blockTypes)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+PackE0::blocktypes() const {
+  // @@protoc_insertion_point(field_list:TropPackets.PackE0.blockTypes)
+  return blocktypes_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+PackE0::mutable_blocktypes() {
+  // @@protoc_insertion_point(field_mutable_list:TropPackets.PackE0.blockTypes)
+  return &blocktypes_;
+}
+
+// -------------------------------------------------------------------
+
+// PackF0
+
+// optional string msg = 1;
+inline void PackF0::clear_msg() {
+  msg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PackF0::msg() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackF0.msg)
+  return msg_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PackF0::set_msg(const ::std::string& value) {
+  
+  msg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:TropPackets.PackF0.msg)
+}
+inline void PackF0::set_msg(const char* value) {
+  
+  msg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:TropPackets.PackF0.msg)
+}
+inline void PackF0::set_msg(const char* value, size_t size) {
+  
+  msg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:TropPackets.PackF0.msg)
+}
+inline ::std::string* PackF0::mutable_msg() {
+  
+  // @@protoc_insertion_point(field_mutable:TropPackets.PackF0.msg)
+  return msg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PackF0::release_msg() {
+  
+  return msg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PackF0::set_allocated_msg(::std::string* msg) {
+  if (msg != NULL) {
+    
+  } else {
+    
+  }
+  msg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), msg);
+  // @@protoc_insertion_point(field_set_allocated:TropPackets.PackF0.msg)
+}
+
+// optional uint32 chatType = 2;
+inline void PackF0::clear_chattype() {
+  chattype_ = 0u;
+}
+inline ::google::protobuf::uint32 PackF0::chattype() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackF0.chatType)
+  return chattype_;
+}
+inline void PackF0::set_chattype(::google::protobuf::uint32 value) {
+  
+  chattype_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackF0.chatType)
+}
+
+// -------------------------------------------------------------------
+
+// PackG0
+
+// optional float mX = 1;
+inline void PackG0::clear_mx() {
+  mx_ = 0;
+}
+inline float PackG0::mx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackG0.mX)
+  return mx_;
+}
+inline void PackG0::set_mx(float value) {
+  
+  mx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackG0.mX)
+}
+
+// optional float mY = 2;
+inline void PackG0::clear_my() {
+  my_ = 0;
+}
+inline float PackG0::my() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackG0.mY)
+  return my_;
+}
+inline void PackG0::set_my(float value) {
+  
+  my_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackG0.mY)
+}
+
+// optional float mVX = 3;
+inline void PackG0::clear_mvx() {
+  mvx_ = 0;
+}
+inline float PackG0::mvx() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackG0.mVX)
+  return mvx_;
+}
+inline void PackG0::set_mvx(float value) {
+  
+  mvx_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackG0.mVX)
+}
+
+// optional float mVY = 4;
+inline void PackG0::clear_mvy() {
+  mvy_ = 0;
+}
+inline float PackG0::mvy() const {
+  // @@protoc_insertion_point(field_get:TropPackets.PackG0.mVY)
+  return mvy_;
+}
+inline void PackG0::set_mvy(float value) {
+  
+  mvy_ = value;
+  // @@protoc_insertion_point(field_set:TropPackets.PackG0.mVY)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

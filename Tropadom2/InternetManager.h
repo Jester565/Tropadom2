@@ -5,15 +5,16 @@ class Client;
 class Pinger;
 class Profile;
 class PeerManager;
+class WorldManager;
 
 class InternetManager
 {
 public:
-	InternetManager();
+	InternetManager(WorldManager* worldManager);
 
 	void init(const std::string& ip, const std::string& port);
 
-	void draw();
+	void drawOverlay();
 
 	Client* getClient()
 	{
@@ -25,6 +26,11 @@ public:
 		return peerManager;
 	}
 
+	Profile* getUserProfile()
+	{
+		return userProfile;
+	}
+
 	~InternetManager();
 
 protected:
@@ -32,6 +38,6 @@ protected:
 	Pinger* pinger;
 	Profile* userProfile;
 	PeerManager* peerManager;
-	bool drawPeerManager;
+	bool showPeers;
 };
 

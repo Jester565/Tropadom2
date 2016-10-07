@@ -16,7 +16,7 @@ void PhysicsBodyLight::draw()
 	PhysicsBody::draw();
 	b2Vec2 bodyPos = body->GetPosition();
 	lbc->setRads(-body->GetAngle());
-	lbc->setXY((bodyPos.x - w / 2) * worldManager->getXScale(), STANDARD_HEIGHT - (bodyPos.y + h / 2) * worldManager->getYScale());
+	lbc->setXY((bodyPos.x - w / 2) * B2D_SCALE, STANDARD_HEIGHT - (bodyPos.y + h / 2) * B2D_SCALE);
 }
 
 PhysicsBodyLight::~PhysicsBodyLight()

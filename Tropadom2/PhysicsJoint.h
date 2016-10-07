@@ -12,7 +12,7 @@ public:
 
 protected:
 	WorldManager* worldManager;
-	b2RevoluteJoint* joint;
+	b2WeldJoint* joint;
 	PhysicsBody* body1;
 	PhysicsBody* body2;
 };

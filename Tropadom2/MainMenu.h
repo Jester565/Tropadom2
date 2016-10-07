@@ -1,6 +1,7 @@
 #pragma once
 #include <ScreenText.h>
 #include <TextField.h>
+#include <Image.h>
 
 class InternetManager;
 class WorldManager;
@@ -9,11 +10,6 @@ class MainMenu
 {
 public:
 	MainMenu(InternetManager* im, WorldManager* worldManager);
-
-	bool isWorldReady()
-	{
-		return worldReady;
-	}
 
 	void draw();
 
@@ -32,6 +28,6 @@ private:
 	AllegroExt::Input::TextField ipField;
 	AllegroExt::Input::TextField portField;
 	bool connecting;
-	bool worldReady;
+	bool loading;
 };
 

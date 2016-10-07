@@ -75,7 +75,7 @@ void PhysicsImgLight::initSquare(const std::string& filePath, float w, float h, 
 		bitmapH = al_get_bitmap_height(bodyBitMap);
 		this->w = w;
 		this->h = h;
-		lbc->initSquare(w * worldManager->getXScale(), h * worldManager->getYScale());
+		lbc->initSquare(w * B2D_SCALE, h * B2D_SCALE);
 		lbc->setRotateLXYToCenter();
 		b2PolygonShape boxShape;
 		boxShape.SetAsBox(w / 2.0f, h / 2.0f);
@@ -113,7 +113,7 @@ PhysicsImgLight::~PhysicsImgLight()
 float PhysicsImgLight::toLightX(float x)
 {
 	std::cout << "IX: " << x << " ";
-	float result = (x/bitmapW) * (worldManager->getXScale() * w);
+	float result = (x/bitmapW) * (B2D_SCALE * w);
 	std::cout << "X: " << result << "  ";
 	return result;
 }
@@ -121,7 +121,7 @@ float PhysicsImgLight::toLightX(float x)
 float PhysicsImgLight::toLightY(float y)
 {
 	std::cout << "IY: " << y << " ";
-	float result = ((bitmapH - y) / bitmapH) * (worldManager->getYScale() * h);
+	float result = ((bitmapH - y) / bitmapH) * (B2D_SCALE * h);
 	std::cout << "Y: " << result << std::endl;
 	return result;
 }

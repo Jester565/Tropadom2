@@ -6,12 +6,12 @@
 #include <Button.h>
 
 MainMenu::MainMenu(InternetManager* im, WorldManager* wm)
-	:internetManager(im), worldManager(wm), connecting(false), worldReady(false)
+	:internetManager(im), worldManager(wm), connecting(false), loading(false)
 {
 	ipField.set((7 * DC_WIDTH) / 8, DC_HEIGHT / 6);
-	ipField.setText("IP");
+	ipField.setText("localhost");
 	portField.set(DC_WIDTH / 2, DC_HEIGHT / 6);
-	portField.setText("Port");
+	portField.setText("4065");
 }
 
 
@@ -58,8 +58,12 @@ void MainMenu::drawConnectLoad()
 	}
 	else if (internetManager->getClient()->getConnectionState() == true)
 	{
-		connectionStatus.drawCenteredText("Connected :)", STANDARD_WIDTH / 2, STANDARD_HEIGHT / 4, FONT_HEIGHT, 0, 0, 0, 255);
-		
+		connectionStatus.drawCenteredText("Loading", STANDARD_WIDTH / 2, STANDARD_HEIGHT / 4, FONT_HEIGHT, 0, 0, 0, 255);
+		if (!loading)
+		{
+			worldManager->init(internetManager);
+			loading = true;
+		}
 	}
 	else
 	{

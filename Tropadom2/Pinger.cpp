@@ -24,7 +24,8 @@ Pinger::~Pinger()
 
 void Pinger::keyA0(boost::shared_ptr<IPacket> iPack)
 {
-	boost::shared_ptr<OPacket> opA0(new OPacket("A0", 0, true));
+	boost::shared_ptr<OPacket> opA0(new OPacket("A0", true));
+	opA0->addSendToID(0);
 	opA0->setData(iPack->getData());
 	im->getClient()->getTCPConnection()->send(opA0);
 }

@@ -20,6 +20,7 @@ public:
 	std::pair<float,float> getXY();
 	float getX();
 	float getY();
+	void setBmp();
 	float getW()
 	{
 		return w;
@@ -28,6 +29,19 @@ public:
 	{
 		return h;
 	}
+
+	void setW(float w)
+	{
+		this->w = w;
+	}
+
+	void setH(float h)
+	{
+		this->h = h;
+	}
+
+	void setFixedRotation(bool mode);
+
 	float getDegs();
 	b2Body* getBody()
 	{

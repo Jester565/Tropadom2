@@ -5,6 +5,8 @@
 #include <Box2D/Box2D.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <InputManager.h>
+#include <iostream>
 
 PhysicsBody::PhysicsBody(WorldManager* worldManager, BodyMode bm, float x, float y, float degs)
 	:worldManager(worldManager), body(nullptr)
@@ -42,6 +44,24 @@ float PhysicsBody::getY()
 {
 	b2Vec2 pos = body->GetPosition();
 	return pos.y;
+}
+
+void PhysicsBody::setBmp()
+{
+	this->bitmapW = w * B2D_SCALE;
+	this->bitmapH = h * B2D_SCALE;
+	bodyBitMap = al_create_bitmap(w * B2D_SCALE, h * B2D_SCALE);
+	ALLEGRO_BITMAP* previousBitmap = al_get_target_bitmap();
+	al_set_target_bitmap(bodyBitMap);
+	al_clear_to_color(al_map_rgba(255, 0, 0, 255));
+	al_set_target_bitmap(previousBitmap);
+}
+
+void PhysicsBody::setFixedRotation(bool mode)
+{
+	{
+		body->SetFixedRotation(true);
+	}
 }
 
 float PhysicsBody::getDegs()
@@ -89,8 +109,12 @@ void PhysicsBody::removeJoint(PhysicsJoint * joint)
 
 void PhysicsBody::draw()
 {
-	b2Vec2 bodyPos = body->GetPosition();
-	al_draw_scaled_rotated_bitmap(bodyBitMap, (bitmapW/2.0), (bitmapH / 2.0), (bodyPos.x) * worldManager->getXScale(), STANDARD_HEIGHT - (bodyPos.y) * worldManager->getYScale(), (w * worldManager->getXScale())/bitmapW, (h * worldManager->getYScale())/bitmapH, -body->GetAngle(), NULL);
+	if (bodyBitMap != nullptr)
+	{
+		b2Vec2 bodyPos = body->GetPosition();
+		int y = -(bodyPos.y - worldManager->getMeterWorldY()) * B2D_SCALE;
+		al_draw_scaled_rotated_bitmap(bodyBitMap, (bitmapW / 2.0), (bitmapH / 2.0), (bodyPos.x - worldManager->getMeterWorldX()) * B2D_SCALE, y, (w * B2D_SCALE) / bitmapW, (h * B2D_SCALE) / bitmapH, -body->GetAngle(), NULL);
+	}
 }
 
 PhysicsBody::~PhysicsBody()
@@ -101,5 +125,9 @@ PhysicsBody::~PhysicsBody()
 	}
 	joints.clear();
 	worldManager->getWorld()->DestroyBody(body);
-	al_destroy_bitmap(bodyBitMap);
+	if (bodyBitMap != nullptr)
+	{
+		al_destroy_bitmap(bodyBitMap);
+		bodyBitMap = nullptr;
+	}
 }

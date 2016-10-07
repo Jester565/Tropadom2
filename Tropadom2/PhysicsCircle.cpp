@@ -20,8 +20,8 @@ void PhysicsCircle::init(b2FixtureDef& fixDef, float radius, int r, int g, int b
 {
 	this->w = radius * 2;
 	this->h = radius * 2;
-	this->bitmapW = w * worldManager->getXScale();
-	this->bitmapH = h * worldManager->getYScale();
+	this->bitmapW = w * B2D_SCALE;
+	this->bitmapH = h * B2D_SCALE;
 	b2CircleShape circleShape;
 	circleShape.m_p.SetZero();
 	circleShape.m_radius = radius;

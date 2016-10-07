@@ -22,15 +22,15 @@ void PhysicsSquareLight::init(b2FixtureDef& boxFixDef, float w, float h, uint8_t
 {
 	this->w = w;
 	this->h = h;
-	this->bitmapW = w * worldManager->getXScale();
-	this->bitmapH = h * worldManager->getYScale();
-	lbc->initSquare(w * worldManager->getXScale(), h * worldManager->getYScale());
+	this->bitmapW = w * B2D_SCALE;
+	this->bitmapH = h * B2D_SCALE;
+	lbc->initSquare(w * B2D_SCALE, h * B2D_SCALE);
 	lbc->setRotateLXYToCenter();
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(w / 2.0f, h / 2.0f);
 	boxFixDef.shape = &boxShape;
 	body->CreateFixture(&boxFixDef);
-	bodyBitMap = al_create_bitmap(w * worldManager->getXScale(), h * worldManager->getYScale());
+	bodyBitMap = al_create_bitmap(w * B2D_SCALE, h * B2D_SCALE);
 	ALLEGRO_BITMAP* previousBitmap = al_get_target_bitmap();
 	al_set_target_bitmap(bodyBitMap);
 	al_clear_to_color(al_map_rgba(r, g, b, a));

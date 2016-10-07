@@ -125,15 +125,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AniJoint.cpp" />
+    <ClCompile Include="AniPart.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockColumn.cpp" />
+    <ClCompile Include="BlockCreator.cpp" />
     <ClCompile Include="BoxCore.cpp" />
     <ClCompile Include="CaveManager.cpp" />
+    <ClCompile Include="ChatBox.cpp" />
+    <ClCompile Include="CobbleStone.cpp" />
     <ClCompile Include="DebugBox.cpp" />
+    <ClCompile Include="Dirt.cpp" />
+    <ClCompile Include="Grass.cpp" />
     <ClCompile Include="InternetManager.cpp" />
+    <ClCompile Include="IronOre.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="OnlineBlockColumn.cpp" />
-    <ClCompile Include="OnlineTerrainManager.cpp" />
     <ClCompile Include="Packets\Trop.pb.cc" />
     <ClCompile Include="Peer.cpp" />
     <ClCompile Include="PeerManager.cpp" />
@@ -147,22 +153,33 @@
     <ClCompile Include="PhysicsSquare.cpp" />
     <ClCompile Include="PhysicsSquareLight.cpp" />
     <ClCompile Include="Pinger.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Profile.cpp" />
+    <ClCompile Include="ShadeBlock.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StoneBrick.cpp" />
     <ClCompile Include="TerrainLBC.cpp" />
     <ClCompile Include="TerrainManager.cpp" />
+    <ClCompile Include="WorldContactListener.cpp" />
+    <ClCompile Include="WorldDebugDraw.cpp" />
     <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AniJoint.h" />
+    <ClInclude Include="AniPart.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockColumn.h" />
+    <ClInclude Include="BlockCreator.h" />
     <ClInclude Include="BoxCore.h" />
     <ClInclude Include="CaveManager.h" />
+    <ClInclude Include="ChatBox.h" />
+    <ClInclude Include="CobbleStone.h" />
     <ClInclude Include="DebugBox.h" />
+    <ClInclude Include="Dirt.h" />
+    <ClInclude Include="Grass.h" />
     <ClInclude Include="InternetManager.h" />
+    <ClInclude Include="IronOre.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="OnlineBlockColumn.h" />
-    <ClInclude Include="OnlineTerrainManager.h" />
     <ClInclude Include="Packets\Trop.pb.h" />
     <ClInclude Include="Peer.h" />
     <ClInclude Include="PeerManager.h" />
@@ -176,10 +193,15 @@
     <ClInclude Include="PhysicsSquare.h" />
     <ClInclude Include="PhysicsSquareLight.h" />
     <ClInclude Include="Pinger.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Profile.h" />
+    <ClInclude Include="ShadeBlock.h" />
+    <ClInclude Include="StoneBrick.h" />
     <ClInclude Include="TerrainConstants.h" />
     <ClInclude Include="TerrainLBC.h" />
     <ClInclude Include="TerrainManager.h" />
+    <ClInclude Include="WorldContactListener.h" />
+    <ClInclude Include="WorldDebugDraw.h" />
     <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <ItemGroup>

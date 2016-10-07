@@ -3,11 +3,12 @@
 #include <Macros.h>
 
 class Client;
+class WorldManager;
 
 class Profile : public PKeyOwner
 {
 public:
-	Profile(Client* client, const std::string& name);
+	Profile(Client* client, WorldManager* wm, const std::string& name);
 
 	std::string getName()
 	{
@@ -19,6 +20,7 @@ public:
 protected:
 	void keyB2(boost::shared_ptr<IPacket> iPack);
 
+	WorldManager* wm;
 	Client* client;
 	IDType id;
 	std::string name;

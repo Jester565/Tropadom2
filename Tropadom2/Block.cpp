@@ -4,88 +4,132 @@
 #include <LightLayer.h>
 #include <LightBlockerContainer.h>
 #include <ShapeRenderer.h>
+#include <Box2D/Box2D.h>
 
 
 Block::Block(WorldManager* wm, TerrainManager* tm)
-	:wm(wm), tm(tm), firstDraw(true), lbc(nullptr)
+	:wm(wm), tm(tm), texture(nullptr), bodySet(false)
 {
-	texture = tm->getTexture(1);
-	textureID = 1;
+
 }
 
-void Block::initLight(Block* n, Block* e, Block* s, Block* w)
+Block::Block(const Block & original)
+	:blockID(original.blockID), wm(original.wm), tm(original.tm), texture(nullptr), body(nullptr)
 {
-	if (n != nullptr && e != nullptr && s != nullptr && w != nullptr)
-	{
-		return;
-	}
-	if (lbc != nullptr)
-	{
-		delete lbc;
-		lbc = nullptr;
-	}
-
-	lbc = new LightBlockerContainer(wm->getLightLayer());
 	
-	if (n == nullptr)
-	{
-		lbc->addLine(0, 0, BLOCK_WIDTH, 0);
-	}
-	if (e == nullptr)
-	{
-		lbc->addLine(BLOCK_WIDTH, 0, BLOCK_WIDTH, BLOCK_WIDTH);
-	}
-	if (s == nullptr)
-	{
-		lbc->addLine(0, BLOCK_WIDTH, BLOCK_WIDTH, BLOCK_WIDTH);
-	}
-	if (w == nullptr)
-	{
-		lbc->addLine(0, BLOCK_WIDTH, 0, 0);
-	}
-	if (lbc->lightBlockers.size() > 0)
-	{
-		textureID = 2;
-		texture = tm->getTexture(2);
-	}
 }
 
-void Block::draw(double x, double y, uint8_t textureID)
+b2FixtureDef Block::getFixDef()
 {
-	if (this->textureID == textureID)
+	b2FixtureDef fixDef;
+	fixDef.density = 1;
+	fixDef.restitution = 0;
+	return fixDef;
+}
+
+
+void Block::draw(float pX, float pY)
+{
+	texture->draw(pX, pY);
+}
+
+void Block::initSurround(Block * n, Block * e, Block * s, Block * w, int64_t bX, int64_t bY)
+{
+	if (!bodySet)
 	{
-		if (lbc != nullptr)
+		if (n == nullptr || e == nullptr || s == nullptr || w == nullptr)
 		{
-			lbc->setXY(x, y);
+			b2BodyDef bodyDef;
+			bodyDef.type = b2_staticBody;
+			bodyDef.position.Set(bX * (BLOCK_WIDTH / B2D_SCALE) - (BLOCK_WIDTH / 2) / B2D_SCALE, -bY * (BLOCK_WIDTH / B2D_SCALE) + (BLOCK_WIDTH / 2) / B2D_SCALE);
+			body = wm->getWorld()->CreateBody(&bodyDef);
+			b2FixtureDef boxFixDef = getFixDef();
+			b2EdgeShape shape;
+			if (n == nullptr)
+			{
+				shape.Set(b2Vec2((-BLOCK_WIDTH / B2D_SCALE) / 2, (BLOCK_WIDTH / B2D_SCALE) / 2), b2Vec2((BLOCK_WIDTH / B2D_SCALE) / 2, (BLOCK_WIDTH / B2D_SCALE) / 2));
+				boxFixDef.shape = &shape;
+				nFixture = body->CreateFixture(&boxFixDef);
+			}
+			if (e == nullptr)
+			{
+				shape.Set(b2Vec2((BLOCK_WIDTH / B2D_SCALE) / 2, (BLOCK_WIDTH / B2D_SCALE) / 2), b2Vec2((BLOCK_WIDTH / B2D_SCALE) / 2, (-BLOCK_WIDTH / B2D_SCALE) / 2));
+				boxFixDef.shape = &shape;
+				eFixture = body->CreateFixture(&boxFixDef);
+			}
+			if (s == nullptr)
+			{
+				shape.Set(b2Vec2((-BLOCK_WIDTH / B2D_SCALE) / 2, (-BLOCK_WIDTH / B2D_SCALE) / 2), b2Vec2((BLOCK_WIDTH / B2D_SCALE) / 2, (-BLOCK_WIDTH / B2D_SCALE) / 2));
+				boxFixDef.shape = &shape;
+				sFixture = body->CreateFixture(&boxFixDef);
+			}
+			if (w == nullptr)
+			{
+				shape.Set(b2Vec2((-BLOCK_WIDTH / B2D_SCALE) / 2, (BLOCK_WIDTH / B2D_SCALE) / 2), b2Vec2((-BLOCK_WIDTH / B2D_SCALE) / 2, (-BLOCK_WIDTH / B2D_SCALE) / 2));
+				boxFixDef.shape = &shape;
+				wFixture = body->CreateFixture(&boxFixDef);
+			}
 		}
-		texture->draw(x, y);
+		bodySet = true;
+	}
+	else if (body != nullptr)
+	{
+		if (n != nullptr && e != nullptr && s != nullptr && w != nullptr)
+		{
+			bodySet = false;
+			wm->getWorld()->DestroyBody(body);
+			nFixture = nullptr;
+			eFixture = nullptr;
+			sFixture = nullptr;
+			wFixture = nullptr;
+			body = nullptr;
+		}
+		else
+		{
+			if (nFixture != nullptr && n != nullptr)
+			{
+				body->DestroyFixture(nFixture);
+				nFixture = nullptr;
+			}
+			if (eFixture != nullptr && e != nullptr)
+			{
+				body->DestroyFixture(eFixture);
+				eFixture = nullptr;
+			}
+			if (sFixture != nullptr && s != nullptr)
+			{
+				body->DestroyFixture(sFixture);
+				sFixture = nullptr;
+			}
+			if (wFixture != nullptr && w != nullptr)
+			{
+				body->DestroyFixture(wFixture);
+				wFixture = nullptr;
+			}
+		}
 	}
 }
 
-void Block::updateLBCPos(double x, double y)
+void Block::updateSurround(float pX, float pY)
 {
-	if (lbc != nullptr)
-	{
-		lbc->setXY(x, y);
-	}
+
 }
 
-void Block::destroyLBC()
+void Block::destroySurround()
 {
-	if (lbc != nullptr)
+	if (body != nullptr)
 	{
-		delete lbc;
-		lbc = nullptr;
+		bodySet = false;
+		wm->getWorld()->DestroyBody(body);
+		body = nullptr;
+		nFixture = nullptr;
+		eFixture = nullptr;
+		sFixture = nullptr;
+		wFixture = nullptr;
 	}
-	textureID = 1;
-	texture = tm->getTexture(1);
 }
 
 Block::~Block()
 {
-	if (lbc != nullptr)
-	{
-		delete lbc;
-		lbc = nullptr;
-	}
+	destroySurround();
 }

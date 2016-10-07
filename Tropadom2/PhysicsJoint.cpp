@@ -24,7 +24,7 @@ PhysicsJoint::PhysicsJoint(WorldManager* worldManager, PhysicsBody* body1, Physi
 	jointDef.localAnchorA.Set(bodyAMeterCords.x, bodyAMeterCords.y);
 	jointDef.localAnchorB.Set(bodyBMeterCords.x, bodyBMeterCords.y);
 	jointDef.collideConnected = collide;
-	joint = (b2RevoluteJoint*)worldManager->getWorld()->CreateJoint(&jointDef);
+	joint = (b2WeldJoint*)worldManager->getWorld()->CreateJoint(&jointDef);
 	body1->addJoint(this);
 	body2->addJoint(this);
 }

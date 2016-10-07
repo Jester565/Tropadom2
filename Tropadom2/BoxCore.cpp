@@ -16,23 +16,26 @@ bool BoxCore::init()
 	if (Core::init())
 	{
 		lightLayer = new LightLayer();
-		internetManager = new InternetManager();
 		worldManager = new WorldManager();
+		internetManager = new InternetManager(worldManager);
 		mainMenu = new MainMenu(internetManager, worldManager);
-		if (worldManager->init())
-		{
-			fpsLogger = new AllegroExt::FPSLogger();
-			return true;
-		}
+		fpsLogger = new AllegroExt::FPSLogger();
+		return true;
 	}
 	return false;
 }
 
 void BoxCore::draw()
 {
-	//mainMenu->draw();
-	worldManager->draw();
-	//internetManager->draw();
+	if (!worldManager->isLoaded())
+	{
+		mainMenu->draw();
+	}
+	else
+	{
+		worldManager->draw();
+	}
+	internetManager->drawOverlay();
 	fpsLogger->draw(5, 10, 50);
 }
 

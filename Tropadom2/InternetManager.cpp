@@ -4,14 +4,14 @@
 #include "Profile.h"
 #include <Client.h>
 
-InternetManager::InternetManager()
-	:drawPeerManager(false)
+InternetManager::InternetManager(WorldManager* worldManager)
+	:showPeers(false)
 {
 	client = new Client();
 	client->createManagers();
 	pinger = new Pinger(this);
-	userProfile = new Profile(client, "Doge");
-	peerManager = new PeerManager(client, userProfile);
+	userProfile = new Profile(client, worldManager, "Doge");
+	peerManager = new PeerManager(client, userProfile, worldManager);
 }
 
 void InternetManager::init(const std::string& ip, const std::string& port)
@@ -19,15 +19,15 @@ void InternetManager::init(const std::string& ip, const std::string& port)
 	client->initClient(ip, port, false);
 }
 
-void InternetManager::draw()
+void InternetManager::drawOverlay()
 {
 	if (AllegroExt::Input::InputManager::keyTyped('p'))
 	{
-		drawPeerManager = !drawPeerManager;
+		showPeers = !showPeers;
 	}
-	if (drawPeerManager)
+	if (showPeers)
 	{
-		peerManager->draw();
+		peerManager->showPeers();
 	}
 }
 
