@@ -68,10 +68,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Props\Boost64_R.props" />
     <Import Project="..\..\..\Props\Box2D64_R.props" />
-    <Import Project="..\..\..\Props\AllegroLightMT64_R.props" />
     <Import Project="..\..\..\Props\AllegroExt64_R.props" />
     <Import Project="..\..\..\Props\CppClient64_R.props" />
     <Import Project="..\..\..\Props\Protobuf64_R.props" />
+    <Import Project="..\..\..\Props\Lighting4.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -179,6 +179,7 @@
     <ClInclude Include="Grass.h" />
     <ClInclude Include="InternetManager.h" />
     <ClInclude Include="IronOre.h" />
+    <ClInclude Include="LightV4.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Packets\Trop.pb.h" />
     <ClInclude Include="Peer.h" />

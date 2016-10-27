@@ -25,7 +25,11 @@ void PhysicsSquareLight::init(b2FixtureDef& boxFixDef, float w, float h, uint8_t
 	this->bitmapW = w * B2D_SCALE;
 	this->bitmapH = h * B2D_SCALE;
 	lbc->initSquare(w * B2D_SCALE, h * B2D_SCALE);
+#ifdef USE_LIGHT_V4
+	lbc->setCXYToCenter();
+#else
 	lbc->setRotateLXYToCenter();
+#endif
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(w / 2.0f, h / 2.0f);
 	boxFixDef.shape = &boxShape;

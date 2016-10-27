@@ -1,8 +1,11 @@
 #pragma once
 #include "PhysicsBodyLight.h"
+#include "LightV4.h"
 #include <Box2D/Box2D.h>
 
-class LightLayer;
+#ifdef USE_LIGHT_V4
+using namespace lighting;
+#endif
 
 class PhysicsSquareLight : public PhysicsBodyLight
 {

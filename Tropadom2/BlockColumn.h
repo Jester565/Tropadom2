@@ -3,10 +3,11 @@
 #include "TerrainConstants.h"
 #include <DisplayManager.h>
 #include <vector>
+#include <AboveLightBlocker.h>
+#include "LightV4.h"
 
 class WorldManager;
 class PerlinManager;
-class AboveLightBlocker;
 class TerrainManager;
 
 class BlockColumn
@@ -63,7 +64,11 @@ private:
 	int begin;
 	int end;
 	uint32_t groundY;
+#ifdef USE_LIGHT_V4
+	lighting::AboveLightBlocker* alb;
+#else
 	AboveLightBlocker* alb;
+#endif
 	WorldManager* wm;
 	TerrainManager* tm;
 	bool initLightCalled;

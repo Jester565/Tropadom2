@@ -1,8 +1,12 @@
 #pragma once
 #include "PhysicsBody.h"
+#include <LightBlockerContainer.h>
+#include <LightLayer.h>
+#include "LightV4.h"
 
-class LightLayer;
-class LightBlockerContainer;
+#ifdef USE_LIGHT_V4
+using namespace lighting;
+#endif
 
 class PhysicsBodyLight : public PhysicsBody
 {

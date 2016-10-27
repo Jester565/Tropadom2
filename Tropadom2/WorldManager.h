@@ -1,16 +1,25 @@
 #pragma once
 #include <allegro5/transformations.h>
+#include <LightLayer.h>
+#include <CircleLightSource.h>
+#include "LightV4.h"
+#ifdef USE_LIGHT_V4
+#include <GaussianBlurrer.h>
+#include <GaussianKernelData.h>
+#endif
 
 class b2World;
 class TerrainManager;
-class LightLayer;
-class LightSource;
 class DebugBox;
 class InternetManager;
 class ChatBox;
 class Player;
 class WorldDebugDraw;
 class WorldContactListener;
+
+#ifdef USE_LIGHT_V4
+using namespace lighting;
+#endif
 
 static const float B2D_SCALE = 19;
 
@@ -53,10 +62,21 @@ public:
 
 	float getMeterWorldY();
 
+#ifdef USE_LIGHT_V4
+	lighting::LightLayer* getLightLayer()
+	{
+		return lightLayer;
+	}
+	
+	GaussianBlurrer* gausBlurrer;
+	GaussianBlurrer* gausBlurrer2;
+
+#else
 	LightLayer* getLightLayer()
 	{
 		return lightLayer;
 	}
+#endif
 
 	void setZoom(float zoom);
 
@@ -94,7 +114,7 @@ protected:
 
 	LightLayer* lightLayer;
 	LightSource* lightSource;
-	LightSource* lightSource2;
+	LightSource* sun;
 	ChatBox* chatBox;
 	b2World* world;
 	Player* player;

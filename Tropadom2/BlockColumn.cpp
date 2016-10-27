@@ -83,16 +83,26 @@ void BlockColumn::draw(double x, uint16_t blockID)
 	{
 		if (alb == nullptr)
 		{
+#ifdef USE_LIGHT_V4
+			alb = new lighting::AboveLightBlocker(wm->getLightLayer(), x, 0, BLOCK_WIDTH);
+#else
 			alb = new AboveLightBlocker(x, 0, BLOCK_WIDTH);
 			wm->getLightLayer()->addAboveLightBlocker(alb);
+#endif
 		}
+#ifdef USE_LIGHT_V4
+		alb->setX(x);
+#else
 		alb->setGlobalX(x);
+#endif
 	}
 	else
 	{
 		if (alb != nullptr)
 		{
+#ifndef USE_LIGHT_V4
 			wm->getLightLayer()->removeAboveLightBlocker(alb);
+#endif
 			delete alb;
 			alb = nullptr;
 		}
@@ -127,7 +137,9 @@ void BlockColumn::updateLBC(double x)
 {
 	if (alb != nullptr)
 	{
+#ifndef USE_LIGHT_V4
 		wm->getLightLayer()->removeAboveLightBlocker(alb);
+#endif
 		delete alb;
 		alb = nullptr;
 	}
@@ -338,7 +350,9 @@ BlockColumn::~BlockColumn()
 	}
 	if (alb != nullptr)
 	{
+#ifndef USE_LIGHT_V4
 		wm->getLightLayer()->removeAboveLightBlocker(alb);
+#endif
 		delete alb;
 	}
 }

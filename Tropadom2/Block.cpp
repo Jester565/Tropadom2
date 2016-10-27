@@ -2,7 +2,6 @@
 #include "WorldManager.h"
 #include "TerrainManager.h"
 #include <LightLayer.h>
-#include <LightBlockerContainer.h>
 #include <ShapeRenderer.h>
 #include <Box2D/Box2D.h>
 

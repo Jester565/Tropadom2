@@ -1,6 +1,7 @@
 #pragma once
 #include "PhysicsBodyLight.h"
 #include <Box2D/Box2D.h>
+#include "LightV4.h"
 
 class PhysicsImgLight : public PhysicsBodyLight
 {

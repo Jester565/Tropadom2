@@ -8,11 +8,8 @@
 #include "WorldDebugDraw.h"
 #include "WorldContactListener.h"
 #include "PeerManager.h"
-#include <DisplayManager.h>
-#include <LightLayer.h>
-#include <CircleLightSource.h>
 #include <AboveLightSource.h>
-#include <DirectionalLightSource.h>
+#include <DisplayManager.h>
 #include <Core.h>
 #include <Box2D/Box2D.h>
 
@@ -20,6 +17,10 @@ const float WorldManager::DEFAULT_GRAV_Y = -40;
 const float WorldManager::DEFAULT_GRAV_X = 0;
 const float WorldManager::METER_W = STANDARD_WIDTH / B2D_SCALE;
 const float WorldManager::METER_H = STANDARD_HEIGHT / B2D_SCALE;
+
+#ifdef USE_LIGHT_V4
+using namespace lighting;
+#endif
 
 WorldManager::WorldManager()
 	:xGrav(DEFAULT_GRAV_X), yGrav(DEFAULT_GRAV_Y), world(nullptr), zoom(1), debugDraw(false), worldDebugDraw(nullptr)
@@ -49,9 +50,17 @@ bool WorldManager::init(InternetManager* im)
 	al_identity_transform(&normalTrans);
 	if (LIGHTING_ENABLED)
 	{
+#ifdef USE_LIGHT_V4
+		lightLayer = new LightLayer(STANDARD_WIDTH, STANDARD_HEIGHT, .25);
+		lightSource = new CircleLightSource(lightLayer, 500, 200, 200, 200);
+		sun = new AboveLightSource(lightLayer);
+		GaussianKernelData kernData(36, 9);
+		gausBlurrer = new GaussianBlurrer(lightLayer, kernData, "VertShader.hlsl", "XFragShader.hlsl", "YFragShader.hlsl");
+		gausBlurrer2 = new GaussianBlurrer(lightLayer, kernData, "VertShader.hlsl", "XFragShader.hlsl", "YFragShader.hlsl");
+#else
 		lightLayer = new LightLayer(.25);
-		lightSource2 = new CircleLightSource(lightLayer, 500, 200, 200, 200);
-		new AboveLightSource(lightLayer);
+		lightSource = new CircleLightSource(lightLayer, 500, 200, 200, 200);
+#endif
 		debugBox = new DebugBox();
 		debugBox->addField("# of LightSource", "?");
 		debugBox->addField("# of LightBlockers", "?");
@@ -65,6 +74,12 @@ bool WorldManager::init(InternetManager* im)
 
 void WorldManager::draw()
 {
+	if (AllegroExt::Input::InputManager::keyTyped('k'))
+	{
+		std::cout << "TOTAL POINTS PROCESSED: " << CircleLightSource::ShadePointsProcessed << std::endl;
+		std::cout << "TOTAL CAST POINTS PROCESSED: " << CircleLightSource::CastPointsProcessed << std::endl;
+		std::cout << "CAST POINTS / POINTS: " << ((float)CircleLightSource::CastPointsProcessed) / CircleLightSource::ShadePointsProcessed << std::endl;
+	}
 	if (zoom != 1)
 	{
 		al_use_transform(&zoomTrans);
@@ -75,7 +90,7 @@ void WorldManager::draw()
 	}
 	if (AllegroExt::Input::InputManager::keyPressed('u'))
 	{
-		((CircleLightSource*)lightSource2)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
+		((CircleLightSource*)lightSource)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
 	}
 	terrainManager->draw();
 	if (player != nullptr)
@@ -111,7 +126,11 @@ void WorldManager::draw()
 	}
 	if (LIGHTING_ENABLED)
 	{
+#ifdef USE_LIGHT_V4
+		lightLayer->detach();
+#else
 		lightLayer->dispatch();
+#endif
 		lightLayer->draw();
 	}
 	if (AllegroExt::Input::InputManager::keyPressed('z'))
@@ -160,10 +179,12 @@ void WorldManager::draw()
 	}
 	world->Step(AllegroExt::Core::rate / 60, 6, 2);
 	world->ClearForces();
+	/*
 	debugBox->setField("# of LightSource", std::to_string(lightLayer->getLightSourceSize()));
 	debugBox->setField("# of LightBlockers", std::to_string(lightLayer->getLightBlockersSize()));
 	debugBox->setField("# of AboveLightBlockers", std::to_string(lightLayer->getAboveBlockerSize()));
 	debugBox->setField("# of LightRunnables", std::to_string(lightLayer->getLightRunnablesSize()));
+	*/
 	debugBox->draw(0, 100);
 	chatBox->draw(STANDARD_WIDTH - chatBox->getW(), STANDARD_HEIGHT - chatBox->getH());
 }
@@ -217,8 +238,6 @@ WorldManager::~WorldManager()
 	terrainManager = nullptr;
 	delete lightSource;
 	lightSource = nullptr;
-	delete lightSource2;
-	lightSource2 = nullptr;
 	delete world;
 	world = nullptr;
 	delete lightLayer;

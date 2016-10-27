@@ -1,7 +1,10 @@
 #pragma once
 #include "Block.h"
+#include "LightV4.h"
 
-class LightBlockerContainer;
+#ifdef USE_LIGHT_V4
+using namespace lighting;
+#endif
 
 class ShadeBlock : public Block
 {

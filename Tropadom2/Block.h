@@ -1,9 +1,9 @@
 #pragma once
 #include <Image.h>
 #include <Box2D/Dynamics/b2Fixture.h>
+#include <LightBlockerContainer.h>
 
 class WorldManager;
-class LightBlockerContainer;
 class TerrainManager;
 class b2Body;
 

@@ -1,11 +1,12 @@
 #pragma once
 #include <Core.h>
 #include <FPSLogger.h>
+#include <LightLayer.h>
+#include "LightV4.h"
 
 using namespace AllegroExt;
 
 class WorldManager;
-class LightLayer;
 class MainMenu;
 class InternetManager;
 
@@ -19,17 +20,28 @@ public:
 		return worldManager;
 	}
 
+#ifdef USE_LIGHT_V4
+	lighting::LightLayer* getLightLayer()
+	{
+		return lightLayer;
+	}
+#else
 	LightLayer* getLightLayer()
 	{
 		return lightLayer;
 	}
+#endif
 
 	~BoxCore();
 
 protected:
 	bool init() override;
 	void draw() override;
+#ifdef USE_LIGHT_V4
+	lighting::LightLayer* lightLayer;
+#else
 	LightLayer* lightLayer;
+#endif
 	WorldManager* worldManager;
 	InternetManager* internetManager;
 	MainMenu* mainMenu;

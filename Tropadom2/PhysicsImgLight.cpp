@@ -76,7 +76,11 @@ void PhysicsImgLight::initSquare(const std::string& filePath, float w, float h, 
 		this->w = w;
 		this->h = h;
 		lbc->initSquare(w * B2D_SCALE, h * B2D_SCALE);
+#ifdef USE_LIGHT_V4
+		lbc->setCXYToCenter();
+#else
 		lbc->setRotateLXYToCenter();
+#endif
 		b2PolygonShape boxShape;
 		boxShape.SetAsBox(w / 2.0f, h / 2.0f);
 		fixDef.shape = &boxShape;
