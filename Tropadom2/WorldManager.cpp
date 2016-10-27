@@ -52,8 +52,8 @@ bool WorldManager::init(InternetManager* im)
 	{
 #ifdef USE_LIGHT_V4
 		lightLayer = new LightLayer(STANDARD_WIDTH, STANDARD_HEIGHT, .25);
-		lightSource = new CircleLightSource(lightLayer, 500, 200, 200, 200);
-		sun = new AboveLightSource(lightLayer);
+		//lightSource = new CircleLightSource(lightLayer, 500, 200, 200, 200);
+		sun = new AboveLightSource(lightLayer, 30);
 		GaussianKernelData kernData(36, 9);
 		gausBlurrer = new GaussianBlurrer(lightLayer, kernData, "VertShader.hlsl", "XFragShader.hlsl", "YFragShader.hlsl");
 		gausBlurrer2 = new GaussianBlurrer(lightLayer, kernData, "VertShader.hlsl", "XFragShader.hlsl", "YFragShader.hlsl");
@@ -90,7 +90,7 @@ void WorldManager::draw()
 	}
 	if (AllegroExt::Input::InputManager::keyPressed('u'))
 	{
-		((CircleLightSource*)lightSource)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
+		//((CircleLightSource*)lightSource)->setXY(AllegroExt::Input::InputManager::mouseX, AllegroExt::Input::InputManager::mouseY);
 	}
 	terrainManager->draw();
 	if (player != nullptr)
@@ -236,8 +236,8 @@ WorldManager::~WorldManager()
 {
 	delete terrainManager;
 	terrainManager = nullptr;
-	delete lightSource;
-	lightSource = nullptr;
+	//delete lightSource;
+	//lightSource = nullptr;
 	delete world;
 	world = nullptr;
 	delete lightLayer;
