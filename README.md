@@ -9,4 +9,4 @@ Player standing in randomly generated caves with a light source dyamically light
 
 ![alt tag](GameImg/tropMP1.PNG)
 ![alt tag](GameImg/tropMP2.PNG)
-Two instances of Tropadom2 where world information is synced and updated.  THe lines represent places the player can collide with and where light should be blocked.  The rectangles are the two players.
+Two instances of Tropadom2 where world information is synced and updated.  The lines represent places the player can collide with and where light should be blocked.  The rectangles are the two players.
