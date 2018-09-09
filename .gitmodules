@@ -1,0 +1,9 @@
+[submodule "Lighting4"]
+	path = Lighting4
+	url = https://github.com/Jester565/Lighting4.git
+[submodule "AllegroExt"]
+	path = AllegroExt
+	url = https://github.com/Jester565/AllegroExt.git
+[submodule "CPP_Client2"]
+	path = CPP_Client2
+	url = https://github.com/Jester565/CPP_Client2.git

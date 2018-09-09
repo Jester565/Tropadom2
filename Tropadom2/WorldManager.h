@@ -113,7 +113,7 @@ protected:
 	InternetManager* internetManager;
 
 	LightLayer* lightLayer;
-	//LightSource* lightSource;
+	LightSource* lightSource;
 	LightSource* sun;
 	ChatBox* chatBox;
 	b2World* world;

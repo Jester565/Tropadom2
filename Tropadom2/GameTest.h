@@ -2,11 +2,11 @@
 #include <FPSLogger.h>
 #include <SoundEffect.h>
 #include <Music.h>
+#include <CircleLightSource.h>
 
 class PhysicsBody;
 class BoxCore;
 class PhysicsJoint;
-class LightSource;
 
 class GameTest
 {
@@ -26,7 +26,7 @@ protected:
 	PhysicsBody* boxBody2;
 	PhysicsJoint* boxJoint;
 	PhysicsBody* groundBody;
-	LightSource* lightSource;
+	lighting::CircleLightSource* lightSource;
 	AllegroExt::FPSLogger* fpsLogger;
 	AllegroExt::Sound::SoundEffect* grassStep;
 	AllegroExt::Sound::Music* monsterSong;

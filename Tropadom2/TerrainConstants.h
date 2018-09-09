@@ -8,11 +8,11 @@ static const int SEED = 2938457264624365;
 static const int BLOCK_DRAW_OFF = 1;
 static const int BLOCK_LIGHT_OFF = 8;
 
-static const int BLOCK_LOAD_BW = 100;
+static const int BLOCK_LOAD_BW = 200;
 static const int BLOCK_DRAW_BW = AllegroExt::Graphics::WINDOW_X / BLOCK_WIDTH + BLOCK_DRAW_OFF * 2;
 static const int BLOCK_OFF_BW = (BLOCK_LOAD_BW - BLOCK_DRAW_BW) / 2;
 
-static const int BLOCK_LOAD_BH = 68;
+static const int BLOCK_LOAD_BH = 100;
 static const int BLOCK_DRAW_BH = AllegroExt::Graphics::WINDOW_Y / BLOCK_WIDTH + BLOCK_DRAW_OFF * 2;
 static const int BLOCK_OFF_BH = (BLOCK_LOAD_BH - BLOCK_DRAW_BH) / 2;
 static const int MAX_BY = 500;
