@@ -12,7 +12,7 @@ Player standing in randomly generated caves with a light source dyamically light
 Two instances of Tropadom2 where world information is synced and updated.  The lines represent places the player can collide with and where light should be blocked.  The rectangles are the two players.
 
 ## Installation
-***Clone repository with --recurse-submodules flag***
+***Clone repository with --recurse-submodules flag***  
 Requirements: Boost (1.68.0), Allegro (5.2.4), Box2D (2.3.1), and Protobuf (3.6.1)  
 
 #### Requirement Installation
