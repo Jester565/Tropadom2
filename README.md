@@ -35,7 +35,7 @@ Requirements: Boost (1.68.0), Allegro (5.2.4), Box2D (2.3.1), and Protobuf (3.6.
 4. Installing Allegro
     * Windows:
         1. After you generate the FarmerGame solution, goto Tools -> NuGet Packet Manager -> Manage NuGet Packages for Solution... -> Browse
-        2. Search for and install Allegro for AllegroExt, Lighting4, and FarmerGame
+        2. Search for and install Allegro for AllegroExt, Lighting4, and Tropadom2
         3. Goto the properties for the Allegro projects and set the dependencies like this ![Allegro Configuration](https://github.com/Jester565/FarmerGame/blob/master/rdme/AllegConf.png)
     * Ubuntu:
         1. Install Allegro5 Package with [this guide](https://wiki.allegro.cc/index.php?title=Install_Allegro_from_Ubuntu_PPAs)
