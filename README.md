@@ -48,3 +48,6 @@ cmake .. -G "Visual Studio 15 2017" -A x64 -T host=x64 -Dboxlibdir="(Box2D Direc
 ```
 Run make or build the solution  
 Set Tropadom2 as Startup Project after building on Visual Studio
+
+#### Troubleshooting
+* If using Visual Studio, make sure all projects are using /MT runtime linking and Basic Runtime Checks is set to default.
