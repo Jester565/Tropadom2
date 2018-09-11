@@ -12,20 +12,26 @@ Player standing in randomly generated caves with a light source dyamically light
 Two instances of Tropadom2 where world information is synced and updated.  The lines represent places the player can collide with and where light should be blocked.  The rectangles are the two players.
 
 ## Installation
-Requirements: Boost (1.68.0), Allegro (5.2.4), and Box2D (2.3.1)
+Requirements: Boost (1.68.0), Allegro (5.2.4), Box2D (2.3.1), and Protobuf (3.6.1)
 
 #### Requirement Installation
 1. Installing Boost
-    1. Download at https://www.boost.org/  
+    1. Download from https://www.boost.org/  
     2. In boost root directory, run ```./bootstrap```  
     3. For default configuration compatibility run: ```./b2 --stagedir=./stage/VS2017/x64 address-model=64 --toolset=msvc-14.1 --with-thread variant=release link=static threading=multi runtime-link=static```  
-    4. Add the boost root directory to CMAKE_INCLUDE_PATH and the directory of your boost library files (should be in stage/lib) to CMAKE_LIBRARY_PATH.  
-2. Installing Box2D
+    4. Add the boost root directory to CMAKE_INCLUDE_PATH and the directory of your boost library files (should be in stage/lib) to CMAKE_LIBRARY_PATH.
+2. Installing Google Protocol Buffers
+    1. Download from https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1
+    2. In protobuf root directory, make a /install and /cmake/build directory
+    3. In /cmake/build run ```cmake  ../.. -G "Visual Studio 15 2017" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../../install```
+    4. Run make or build solution
+    5. Add (protobuf root)/src to CMAKE_INCLUDE_PATH and the directory of your protobuf library files (should be in (protobuf root)/cmake/build/lib/release/Release) to CMAKE_LIBRARY_PATH
+3. Installing Box2D
     1. Download from https://github.com/erincatto/Box2D
     2. Install [Premake5](https://premake.github.io/)
     3. Run ```premake5 vs2017 --StaticRuntime```
     4. Run visual studio solution or make
-3. Installing Allegro
+4. Installing Allegro
     * Windows:
         1. After you generate the FarmerGame solution, goto Tools -> NuGet Packet Manager -> Manage NuGet Packages for Solution... -> Browse
         2. Search for and install Allegro for AllegroExt, Lighting4, and FarmerGame
